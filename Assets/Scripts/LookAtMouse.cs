@@ -24,7 +24,7 @@ public class LookAtMouse : MonoBehaviour
 		//Ta Daaa
 		transform.rotation =  Quaternion.Euler (new Vector3(-90, 0 , -angle));
 	}
-
+	//magic
 	float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
 		return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
 	}

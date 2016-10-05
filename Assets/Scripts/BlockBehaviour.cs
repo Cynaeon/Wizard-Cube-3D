@@ -21,23 +21,53 @@ public class BlockBehaviour : MonoBehaviour {
 	
 	}
 
+//	void OnMouseOver() {
+//		if(GameObject.Find("BlockController").GetComponent<BlockLimiter>().Raisins){
+//		rend.material.color = hightlightColor;
+//
+//			if (Input.GetMouseButtonDown (0)) {
+//				if (!blockRaised) {
+//					Vector3 v = transform.position;
+//					v.y = 1f;
+//					transform.position = v;
+//					blockRaised = true;
+//					GameObject.Find ("BlockController").GetComponent<BlockLimiter> ().setRaised (1);
+//
+//				} else {
+//					Vector3 v = transform.position;
+//					v.y = 0.5f;
+//					transform.position = v;
+//					blockRaised = false;
+//					GameObject.Find ("BlockController").GetComponent<BlockLimiter> ().setRaised (-1);
+//				}
+//			}
+//		}
+//	}
+
 	void OnMouseOver() {
-
-		rend.material.color = hightlightColor;
-
-		if (Input.GetMouseButtonDown (0)) {
-			if (!blockRaised) {
-				Vector3 v = transform.position;
-				v.y = 1f;
-				transform.position = v;
-				blockRaised = true;
-			} else {
-				Vector3 v = transform.position;
-				v.y = 0.5f;
-				transform.position = v;
-				blockRaised = false;
+		if (!blockRaised) {
+			if (GameObject.Find ("BlockController").GetComponent<BlockLimiter> ().Raisins) {
+				rend.material.color = hightlightColor;
+				if (Input.GetMouseButtonDown (0)) {
+					Vector3 v = transform.position;
+					v.y = 1f;
+					transform.position = v;
+					blockRaised = true;
+					GameObject.Find ("BlockController").GetComponent<BlockLimiter> ().setRaised (1);
+				
+				}
 			}
-		}
+		} else if (blockRaised) {
+				rend.material.color = hightlightColor;
+				if (Input.GetMouseButtonDown (0)) {
+					Vector3 v = transform.position;
+					v.y = 0.5f;
+					transform.position = v;
+					blockRaised = false;
+					GameObject.Find ("BlockController").GetComponent<BlockLimiter> ().setRaised (-1);
+				}
+			}
+
 	}
 
 	void OnMouseExit() {
