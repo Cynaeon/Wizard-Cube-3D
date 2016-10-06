@@ -4,14 +4,14 @@ using System.Collections;
 public class BlockLimiter : MonoBehaviour {
 	[Range(1,10)]
 	public int maxRaisedAmount = 5;
-	private int raised;
+	private int _raised;
 
-	private bool Raisins;
+	public bool canRaise;
 
 	// Use this for initialization
 	void Start () {
-		Raisins = true;
-		raised = 0;
+		canRaise = true;
+		_raised = 0;
 	}
 	
 	// Update is called once per frame
@@ -20,16 +20,16 @@ public class BlockLimiter : MonoBehaviour {
 	}
 
 	public void setRaised(int blockRaised){
-		raised += blockRaised;
-		Debug.Log ("Raised amount: " + raised);
+		_raised += blockRaised;
+		Debug.Log ("Raised amount: " + _raised);
 	}
 
 	void CheckRaise(){
-		if (raised >= maxRaisedAmount) {
-			Raisins = false;
+		if (_raised >= maxRaisedAmount) {
+			canRaise = false;
 		}
-		if (raised < maxRaisedAmount) {
-			Raisins = true;
+		if (_raised < maxRaisedAmount) {
+			canRaise = true;
 		}
 	}
 
