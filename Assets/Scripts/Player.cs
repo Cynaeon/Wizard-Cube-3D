@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
 	void Start () {
 		transform.LookAt(target);
 	}
-	
+
 	public Transform target;
 
 	void Update() {
@@ -18,7 +18,12 @@ public class Player : MonoBehaviour {
 
 		Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
 		transform.position += movement * speed;
+	}
 
-
+	void OnTriggerEnter(Collider other) {
+		if (other.tag == "Mana") {
+			BlockLimiter.instance.maxRaisedAmount += 1;
+			Destroy (other.gameObject);
+		}
 	}
 }

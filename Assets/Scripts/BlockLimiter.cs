@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class BlockLimiter : MonoBehaviour {
 	[Range(1,10)]
 	public int maxRaisedAmount = 5;
-	private int _raised;
+	public int _raised;
 
 	public bool canRaise;
+	public static BlockLimiter instance;
 
 	// Use this for initialization
 	void Start () {
 		canRaise = true;
 		_raised = 0;
+		instance = this;
 	}
 	
 	// Update is called once per frame
@@ -32,5 +35,4 @@ public class BlockLimiter : MonoBehaviour {
 			canRaise = true;
 		}
 	}
-
 }
