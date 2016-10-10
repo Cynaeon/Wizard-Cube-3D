@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 81166b34a0b2016489cdd80b267a25cd
-timeCreated: 1476114251
+guid: 8fffc5ca65dbe8e4ca9ff42f5e798166
+timeCreated: 1476117556
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - turret: {fileID: 1000013748456204, guid: 13aa989b4d720824698dfad5d1694c66, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

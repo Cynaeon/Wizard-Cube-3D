@@ -1,6 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Bullet.cs">
+    <Files>
+      <File FileName="Assets\Scripts\BlockLimiter.cs" Line="40" Column="35" />
+      <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FloatEffect.cs" Line="6" Column="24" />
+      <File FileName="Assets\Scripts\LookAtTarget.cs" Line="6" Column="27" />
+      <File FileName="Assets\Scripts\BlockBehaviour.cs" Line="98" Column="113" />
+      <File FileName="Assets\Scripts\UItext.cs" Line="20" Column="9" />
+      <File FileName="Assets\Scripts\EnemyNavigation.cs" Line="8" Column="31" />
+      <File FileName="Assets\Scripts\Bullet.cs" Line="8" Column="21" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

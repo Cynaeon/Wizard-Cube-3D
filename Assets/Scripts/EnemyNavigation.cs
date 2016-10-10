@@ -5,6 +5,8 @@ namespace WizardCube
 {
     public class EnemyNavigation : MonoBehaviour
     {
+		public int health = 10;
+
         public Transform goal;
         NavMeshAgent agent;
 
@@ -16,6 +18,11 @@ namespace WizardCube
 
         void Update()
         {
+			if (health < 1) 
+			{
+				Destroy (this.gameObject);
+			}
+
             if (!agent.hasPath)
             {
                 Debug.Log("Chaser has no path");
@@ -23,6 +30,16 @@ namespace WizardCube
                 return;
             }
         }
+
+		void OnTriggerEnter(Collider other)
+		{
+			if (other.tag == "Bullet") 
+			{
+				health -= 1;
+				Destroy (other.gameObject);
+			}
+
+		}
     }
 }
 

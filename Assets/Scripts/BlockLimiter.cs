@@ -9,6 +9,9 @@ namespace WizardCube
         public int maxRaisedAmount = 5;
         public int _raised;
 
+		public int turretsMax = 3;
+		public int _turretsPlaced; 
+
         public bool canRaise;
         public static BlockLimiter instance;
 
@@ -31,6 +34,11 @@ namespace WizardCube
             _raised += blockRaised;
             Debug.Log("Raised amount: " + _raised);
         }
+
+		public void setTurret(int turretPlaced)
+		{
+			_turretsPlaced += turretPlaced;
+		}
 
         void CheckRaise()
         {
