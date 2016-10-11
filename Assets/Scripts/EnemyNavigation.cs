@@ -16,6 +16,7 @@ namespace WizardCube
         {
             agent = GetComponent<NavMeshAgent>();
             agent.destination = goal.position;
+            agent.Stop();
         }
 
         void Update()
@@ -53,6 +54,11 @@ namespace WizardCube
 			}
 
 		}
+
+        public void MoveOut()
+        {
+            agent.Resume();
+        }
     }
 }
 
