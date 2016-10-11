@@ -20,10 +20,11 @@ namespace WizardCube
 
         void Update()
         {
-            if (transform.position.y <= 1.1f)
+            if (transform.position.y <= 1.3f)
             {
                 _inHole = true;
                 agent.Stop();
+                transform.Translate(new Vector3(0, -0.3f, 0) * Time.deltaTime);
             }
 
             if (health < 1) 
