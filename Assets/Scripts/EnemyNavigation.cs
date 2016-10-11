@@ -10,6 +10,8 @@ namespace WizardCube
         public Transform goal;
         NavMeshAgent agent;
 
+        private bool _inHole;
+
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
@@ -18,12 +20,18 @@ namespace WizardCube
 
         void Update()
         {
-			if (health < 1) 
+            if (transform.position.y <= 1.1f)
+            {
+                _inHole = true;
+                agent.Stop();
+            }
+
+            if (health < 1) 
 			{
 				Destroy (this.gameObject);
 			}
 
-            if (!agent.hasPath)
+            if (!agent.hasPath && !_inHole)
             {
                 Debug.Log("Chaser has no path");
                 agent.SetDestination(goal.position);
