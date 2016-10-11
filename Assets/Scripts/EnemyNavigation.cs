@@ -28,14 +28,18 @@ namespace WizardCube
 
             if (health < 1) 
 			{
+                agent.enabled = false;
 				Destroy (this.gameObject);
 			}
 
             if (!agent.hasPath && !_inHole)
             {
-                Debug.Log("Chaser has no path");
-                agent.SetDestination(goal.position);
-                return;
+                if (agent.isActiveAndEnabled)
+                {
+                    Debug.Log("Chaser has no path");
+                    agent.SetDestination(goal.position);
+                    return;
+                }
             }
         }
 
