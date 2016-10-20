@@ -15,13 +15,17 @@ namespace WizardCube
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
+            
+            //agent.Stop();
+            //gameObject.SetActive(false);
+            GameObject treasure = GameObject.FindGameObjectWithTag("Defend");
+            goal = treasure.transform;
             agent.destination = goal.position;
-            agent.Stop();
-            gameObject.SetActive(false);
         }
 
         void Update()
         {
+            
             if (transform.position.y <= 1.3f)
             {
                 _inHole = true;

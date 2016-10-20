@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 8d734b7a5d9a0d543bc462e14dee16c2
-timeCreated: 1476959351
+guid: 1485961dbba35034b9fe2b02d128d457
+timeCreated: 1476723770
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - treasure: {fileID: 1000012585095746, guid: 1b5f0daddd1bab8418d6fa0db33c9441, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
