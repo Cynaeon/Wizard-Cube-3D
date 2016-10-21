@@ -8,19 +8,19 @@ namespace WizardCube
 		public int health = 10;
 
         public Transform goal;
-        NavMeshAgent agent;
 
+        private NavMeshAgent _agent;
         private bool _inHole;
 
         void Start()
         {
-            agent = GetComponent<NavMeshAgent>();
+            _agent = GetComponent<NavMeshAgent>();
             
-            //agent.Stop();
+            _agent.Stop();
             //gameObject.SetActive(false);
             GameObject treasure = GameObject.FindGameObjectWithTag("Defend");
             goal = treasure.transform;
-            agent.destination = goal.position;
+            _agent.destination = goal.position;
         }
 
         void Update()
@@ -29,22 +29,22 @@ namespace WizardCube
             if (transform.position.y <= 1.3f)
             {
                 _inHole = true;
-                agent.Stop();
+                _agent.Stop();
                 transform.Translate(new Vector3(0, -0.3f, 0) * Time.deltaTime);
             }
 
             if (health < 1) 
 			{
-                agent.enabled = false;
+                _agent.enabled = false;
 				Destroy (this.gameObject);
 			}
 
-            if (!agent.hasPath && !_inHole)
+            if (!_agent.hasPath && !_inHole)
             {
-                if (agent.isActiveAndEnabled)
+                if (_agent.isActiveAndEnabled)
                 {
                     Debug.Log("Chaser has no path");
-                    agent.SetDestination(goal.position);
+                    _agent.SetDestination(goal.position);
                     return;
                 }
             }
@@ -63,7 +63,32 @@ namespace WizardCube
         public void MoveOut()
         {
             gameObject.SetActive(true);
-            agent.Resume();
+            _agent.Resume();
+        }
+
+        void OnDrawGizmos()
+        {
+            if (_agent == null || _agent.path == null)
+                return;
+
+            var line = this.GetComponent<LineRenderer>();
+            if (line == null)
+            {
+                line = this.gameObject.AddComponent<LineRenderer>();
+                line.material = new Material(Shader.Find("Sprites/Default")) { color = Color.yellow };
+                line.SetWidth(0.1f, 0.1f);
+                line.SetColors(Color.blue, Color.blue);
+            }
+
+            var path = _agent.path;
+
+            line.SetVertexCount(path.corners.Length);
+
+            for (int i = 0; i < path.corners.Length; i++)
+            {
+                line.SetPosition(i, path.corners[i]);
+            }
+
         }
     }
 }
