@@ -18,8 +18,8 @@ namespace WizardCube
             
             _agent.Stop();
             //gameObject.SetActive(false);
-            GameObject treasure = GameObject.FindGameObjectWithTag("Defend");
-            goal = treasure.transform;
+            //GameObject treasure = GameObject.FindGameObjectWithTag("Defend");
+            //goal = treasure.transform;
             _agent.destination = goal.position;
         }
 

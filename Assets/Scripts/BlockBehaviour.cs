@@ -11,6 +11,7 @@ namespace WizardCube
         private Color _hightlightColor;
         private BlockLimiter _blockLimiter;
         private NavMeshObstacle _navMeshObstacle;
+        private DynamicTDGridObject _mapObstacle;
 
         public GameObject turret;
 
@@ -21,6 +22,7 @@ namespace WizardCube
         {
             _blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
             _navMeshObstacle = GetComponent<NavMeshObstacle>();
+            _mapObstacle = GetComponent<DynamicTDGridObject>();
         }
 
         // Use this for initialization
@@ -73,6 +75,7 @@ namespace WizardCube
                         v.y = 1f;
                         transform.position = v;
                         _navMeshObstacle.enabled = true;
+                        _mapObstacle.enabled = true;
                         blockRaised = true;
                         _blockLimiter.setRaised(1);
 
@@ -91,6 +94,7 @@ namespace WizardCube
 				if (Input.GetMouseButtonDown(0) && !turretPlaced)
                 {
                     _navMeshObstacle.enabled = false;
+                    _mapObstacle.enabled = false;
                     Vector3 v = transform.position;
                     v.y = 0.5f;
                     transform.position = v;
