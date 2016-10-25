@@ -13,6 +13,7 @@ namespace WizardCube
         private BlockLimiter _blockLimiter;
         private NavMeshObstacle _navMeshObstacle;
         private GraphUpdateObject _guo;
+        private Vector3 _startPosition;
 
         public GameObject turret;
 

@@ -64,7 +64,7 @@ namespace WizardCube
         {
             StateManager.StateLoaded -= HandleStateLoaded;
         }
-
+        
         public void ResumeAgents()
         {
             foreach(GameObject enemy in _enemies)
