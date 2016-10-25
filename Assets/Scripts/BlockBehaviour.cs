@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 namespace WizardCube
 {
@@ -11,6 +12,7 @@ namespace WizardCube
         private Color _hightlightColor;
         private BlockLimiter _blockLimiter;
         private NavMeshObstacle _navMeshObstacle;
+        private GraphUpdateObject _guo;
 
         public GameObject turret;
 
@@ -21,6 +23,8 @@ namespace WizardCube
         {
             _blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
             _navMeshObstacle = GetComponent<NavMeshObstacle>();
+            _guo = new GraphUpdateObject(GetComponent<Collider>().bounds);
+            _guo.updatePhysics = true;
         }
 
         // Use this for initialization
@@ -75,6 +79,7 @@ namespace WizardCube
                         _navMeshObstacle.enabled = true;
                         blockRaised = true;
                         _blockLimiter.setRaised(1);
+                        AstarPath.active.UpdateGraphs(_guo);
 
                     }
                 }
@@ -96,6 +101,7 @@ namespace WizardCube
                     transform.position = v;
                     blockRaised = false;
                     _blockLimiter.setRaised(-1);
+                    AstarPath.active.UpdateGraphs(_guo);
                 }
 
 				// Create turret at the clicked block's location
