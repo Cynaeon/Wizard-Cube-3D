@@ -66,53 +66,58 @@ namespace WizardCube
 
         void OnMouseOver()
         {
-            if (!blockRaised)
-            {
-                if (_blockLimiter.canRaise)
-                {
-                    _rend.material.color = _hightlightColor;
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        Vector3 v = transform.position;
-                        v.y = 1f;
-                        transform.position = v;
-                        _navMeshObstacle.enabled = true;
-                        blockRaised = true;
-                        _blockLimiter.setRaised(1);
-                        AstarPath.active.UpdateGraphs(_guo);
-                    }
-                }
-            }
-            else if (blockRaised)
-            {
-				
-				// Highlight the block on mouse over
-				if (!turretPlaced) {
-					_rend.material.color = _hightlightColor;
-				}
+			GameObject Canvas = GameObject.Find ("Canvas");
+			Pause pause = Canvas.GetComponent<Pause> ();
 
-				// Lower the block
-				if (Input.GetMouseButtonDown(0) && !turretPlaced)
-                {
-                    _navMeshObstacle.enabled = false;
-                    Vector3 v = transform.position;
-                    v.y = 0.5f;
-                    transform.position = v;
-                    blockRaised = false;
-                    _blockLimiter.setRaised(-1);
-                    AstarPath.active.UpdateGraphs(_guo);
-                }
+			if (pause.paused) {
+	            if (!blockRaised)
+	            {
+	                if (_blockLimiter.canRaise)
+	                {
+	                    _rend.material.color = _hightlightColor;
+	                    if (Input.GetMouseButtonDown(0))
+	                    {
+	                        Vector3 v = transform.position;
+	                        v.y = 1f;
+	                        transform.position = v;
+	                        _navMeshObstacle.enabled = true;
+	                        blockRaised = true;
+	                        _blockLimiter.setRaised(1);
+	                        AstarPath.active.UpdateGraphs(_guo);
+	                    }
+	                }
+	            }
+	            else if (blockRaised)
+	            {
+					
+					// Highlight the block on mouse over
+					if (!turretPlaced) {
+						_rend.material.color = _hightlightColor;
+					}
 
-				// Create turret at the clicked block's location
-				if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
-				{
-					Vector3 pos = new Vector3 (transform.position.x, transform.position.y + 0.75f, transform.position.z);
-					Quaternion rot = new Quaternion (0, 0, 0, 0);
-					Instantiate (turret, pos, rot);
-					turretPlaced = true;
-					_blockLimiter.setTurret (1);
-				}
-            }
+					// Lower the block
+					if (Input.GetMouseButtonDown(0) && !turretPlaced)
+	                {
+	                    _navMeshObstacle.enabled = false;
+	                    Vector3 v = transform.position;
+	                    v.y = 0.5f;
+	                    transform.position = v;
+	                    blockRaised = false;
+	                    _blockLimiter.setRaised(-1);
+	                    AstarPath.active.UpdateGraphs(_guo);
+	                }
+
+					// Create turret at the clicked block's location
+					if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
+					{
+						Vector3 pos = new Vector3 (transform.position.x, transform.position.y + 0.75f, transform.position.z);
+						Quaternion rot = new Quaternion (0, 0, 0, 0);
+						Instantiate (turret, pos, rot);
+						turretPlaced = true;
+						_blockLimiter.setTurret (1);
+					}
+	            }
+			}
         }
 
         void OnMouseExit()

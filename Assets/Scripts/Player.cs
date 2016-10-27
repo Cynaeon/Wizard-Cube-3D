@@ -15,12 +15,20 @@ namespace WizardCube
 	    public Transform target;
 
 	    void Update() {
-		    float moveHorizontal = Input.GetAxisRaw ("Horizontal");
-		    float moveVertical = Input.GetAxisRaw ("Vertical");
+			
+			float moveHorizontal = Input.GetAxisRaw ("Horizontal");
+			float moveVertical = Input.GetAxisRaw ("Vertical");
 
-		    Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
-		    transform.position += movement * speed;
-	    }
+			GameObject Canvas = GameObject.Find ("Canvas");
+			Pause pause = Canvas.GetComponent<Pause> ();
+
+			if (pause.paused) {
+				Vector3 movement = new Vector3 (moveHorizontal, 0, moveVertical);
+				transform.position += movement * speed;
+			}
+		}
+
+	    
 
 	    void OnTriggerEnter(Collider other) {
 		    if (other.tag == "Mana") {

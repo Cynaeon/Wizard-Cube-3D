@@ -12,7 +12,6 @@ public class ButtonManager : MonoBehaviour {
 		Application.Quit();
 	}
 		
-
 	// Use this for initialization
 	void Start () {
 	
@@ -20,6 +19,13 @@ public class ButtonManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		Escape ();
+	}
+	public void Escape(){
+		if (Application.loadedLevelName == "stageSelect") {
+			if (Input.GetKeyDown(KeyCode.Escape)){
+				SceneManager.LoadScene("mainMenu");
+			}
+		}
 	}
 }
