@@ -65,11 +65,11 @@ namespace WizardCube
             StateManager.StateLoaded -= HandleStateLoaded;
         }
         
-        public void ResumeAgents()
+        public void ResumeEnemies()
         {
             foreach(GameObject enemy in _enemies)
             {
-                enemy.GetComponent<EnemyNavigation>().MoveOut();
+                enemy.GetComponent<AILerp>().canMove = true;
             }
         }
     }
