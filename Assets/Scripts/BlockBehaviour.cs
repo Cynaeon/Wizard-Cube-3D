@@ -78,7 +78,7 @@ namespace WizardCube
 	                    if (Input.GetMouseButtonDown(0))
 	                    {
 	                        Vector3 v = transform.position;
-	                        v.y = 1f;
+	                        v.y = 1.1f;
 	                        transform.position = v;
 	                        _navMeshObstacle.enabled = true;
 	                        blockRaised = true;
