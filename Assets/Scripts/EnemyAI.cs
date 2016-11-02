@@ -20,6 +20,7 @@ public class EnemyAI : MonoBehaviour {
         if (transform.position.y <= 0.54f)
         {
             _aiLerp.canMove = false;
+            transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
             Debug.Log("One AI fell into a hole, movement stopped.");
         }
 	}
