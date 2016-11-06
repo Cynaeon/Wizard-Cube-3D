@@ -6,10 +6,12 @@ namespace WizardCube
     public class HoleBlockBehaviour : MonoBehaviour
     {
         //private BoxCollider _trapCollider;
+        private Rigidbody _rigidBody;
 
         private void Awake()
         {
             //_trapCollider = GetComponentInChildren<BoxCollider>();
+            _rigidBody = GetComponentInParent<Rigidbody>();
         }
 
         // Use this for initialization
@@ -21,15 +23,21 @@ namespace WizardCube
         // Update is called once per frame
         void Update()
         {
-
+            if (transform.position.y <= -4)
+            {
+                Destroy(transform.parent.gameObject);
+            }
         }
 
-        void OnCollisionEnter(Collision collision)
+        void OnTriggerEnter(Collider other)
         {
-            if (collision.gameObject.tag == "Enemy")
+            if (other.gameObject.tag == "Enemy")
             {
-                collision.gameObject.GetComponent<EnemyAI>().MovementControl(true);
-                Destroy(transform.parent.gameObject);
+                other.gameObject.GetComponent<EnemyAI>().MovementControl(true);
+                other.gameObject.transform.position = new Vector3(2.5f, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
+                other.gameObject.transform.SetParent(transform);
+                _rigidBody.isKinematic = false;
+                _rigidBody.useGravity = true;
             }
         }
     }
