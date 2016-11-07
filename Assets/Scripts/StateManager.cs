@@ -20,6 +20,7 @@ namespace WizardCube
         ActiveToVictory,
         ActiveToGameOver,
         VictoryToPreparations,
+        VictoryToMenu,
         GameOverToPreparations
     }
 
