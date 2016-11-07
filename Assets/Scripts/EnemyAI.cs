@@ -8,6 +8,23 @@ namespace WizardCube
         [SerializeField]
         private AILerp _aiLerp;
 
+        void Awake()
+        {
+            if (tag != "Enemy")
+            {
+                Debug.LogError("The tag of " + gameObject.name + "is not set as Enemy!");
+                Debug.Break();
+            }
+            else if (tag == "Enemy")
+            {
+                if (transform.GetChild(0).tag != "Enemy")
+                {
+                    Debug.LogError("The tag of " + transform.GetChild(0).gameObject.name + "is not set as Enemy!");
+                    Debug.Break();
+                }
+            }
+        }
+
 	    // Use this for initialization
 	    void Start ()
         {
