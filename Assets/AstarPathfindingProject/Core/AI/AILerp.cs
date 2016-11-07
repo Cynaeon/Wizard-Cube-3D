@@ -236,6 +236,7 @@ public class AILerp : MonoBehaviour {
 	 * and override the function in that script.
 	 */
 	public virtual void OnTargetReached () {
+        canMove = false;
 	}
 
 	/** Called when a requested path has finished calculation.

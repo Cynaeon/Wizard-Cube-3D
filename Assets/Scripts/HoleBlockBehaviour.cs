@@ -5,12 +5,10 @@ namespace WizardCube
 {
     public class HoleBlockBehaviour : MonoBehaviour
     {
-        //private BoxCollider _trapCollider;
         private Rigidbody _rigidBody;
 
         private void Awake()
         {
-            //_trapCollider = GetComponentInChildren<BoxCollider>();
             _rigidBody = GetComponentInParent<Rigidbody>();
         }
 

@@ -41,5 +41,10 @@ namespace WizardCube
                 _aiLerp.canMove = true;
             }
         }
+
+        public void ChangeTarget(Transform newTarget)
+        {
+            _aiLerp.target = newTarget;
+        }
     }
 }
