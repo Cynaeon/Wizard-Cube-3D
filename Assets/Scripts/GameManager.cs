@@ -56,6 +56,7 @@ namespace WizardCube
         {
             //Use this for initialization of required GameManager parts.
             InitializeStateManager();
+            CheckAll();
         }
 
         private void InitializeStateManager ()
@@ -69,12 +70,27 @@ namespace WizardCube
         {
             StateManager.StateLoaded -= HandleStateLoaded;
         }
+
+        // Checks that enemies and NoControlBlockPrefab have been set
+        private void CheckAll()
+        {
+            if (_enemies.Count <= 0)
+            {
+                Debug.LogError("No enemies detected in GameManager Enemies list!");
+                Debug.Break();
+            }
+
+            if (_noControlBlockPrefab == null)
+            {
+                Debug.LogError("NoControlBlockPrefab is null!");
+                Debug.Break();
+            }
+        }
         
         public void ResumeEnemies()
         {
             foreach(GameObject enemy in _enemies)
             {
-                //enemy.GetComponent<AILerp>().canMove = true;
                 enemy.GetComponent<EnemyAI>().MovementControl(false);
             }
         }
@@ -85,6 +101,27 @@ namespace WizardCube
             _guo = new GraphUpdateObject(placedBlock.GetComponent<Collider>().bounds);
             _guo.updatePhysics = true;
             AstarPath.active.UpdateGraphs(_guo);
+        }
+
+        public void ManageEnemyList(GameObject enemyToRemove)
+        {
+            if (_enemies.Count != 0)
+            {
+                if (_enemies.Contains(enemyToRemove))
+                {
+                    _enemies.Remove(enemyToRemove);
+                    CheckVictory();
+                }
+            }
+        }
+
+        public void CheckVictory()
+        {
+            if (_enemies.Count <= 0)
+            {
+                Debug.Log("Victory!");
+                Debug.Break();
+            }
         }
     }
 }

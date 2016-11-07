@@ -38,12 +38,7 @@ namespace WizardCube
 	    // Update is called once per frame
 	    void Update ()
         {
-            if (transform.position.y <= 0.54f)
-            {
-                _aiLerp.canMove = false;
-                transform.rotation = Quaternion.Euler(new Vector3(0,0,0));
-                Debug.Log("One AI fell into a hole, movement stopped.");
-            }
+            
 	    }
 
         // Use this when you want to either make this gameobject move or stop moving

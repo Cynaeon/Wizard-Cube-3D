@@ -9,6 +9,7 @@ namespace WizardCube
         private float _countdown;
         private bool _timeUntilFall;
         private Vector3 positionAtStart;
+        private GameObject enemyInHole;
 
         private void Awake()
         {
@@ -41,6 +42,7 @@ namespace WizardCube
             if (transform.position.y <= -4)
             {
                 GameManager.Instance.AddCube(positionAtStart);
+                GameManager.Instance.ManageEnemyList(enemyInHole);
                 Destroy(transform.parent.gameObject);
             }
         }
@@ -52,6 +54,7 @@ namespace WizardCube
                 //other.gameObject.GetComponent<EnemyAI>().ChangeTarget(transform);
                 //other.gameObject.transform.position = new Vector3(2.5f, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
                 other.gameObject.transform.SetParent(transform);
+                enemyInHole = other.gameObject;
                 _timeUntilFall = true;
                 //_rigidBody.isKinematic = false;
                 //_rigidBody.useGravity = true;
