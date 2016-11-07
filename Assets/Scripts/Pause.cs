@@ -21,11 +21,11 @@ public class Pause : MonoBehaviour {
 	public void ChangePanel () {
 		if(Panel.activeInHierarchy == true){
 			Panel.SetActive (false);
-			Time.timeScale = 0;
+			Time.timeScale = 1;
 			paused = true;
 		}else{
 			Panel.SetActive (true);
-			Time.timeScale = 1;
+			Time.timeScale = 0;
 			paused = false;
 		}
 		
