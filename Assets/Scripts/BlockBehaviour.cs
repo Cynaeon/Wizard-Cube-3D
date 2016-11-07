@@ -22,7 +22,7 @@ namespace WizardCube
         void Awake()
         {
             _blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
-            _navMeshObstacle = GetComponent<NavMeshObstacle>();
+            //_navMeshObstacle = GetComponent<NavMeshObstacle>();
             _guo = new GraphUpdateObject(GetComponent<Collider>().bounds);
             _guo.updatePhysics = true;
         }
@@ -30,9 +30,9 @@ namespace WizardCube
         // Use this for initialization
         void Start()
         {
-            _rend = GetComponent<Renderer>();
-            _defaultColor = _rend.material.color;
-            _hightlightColor = new Color(_defaultColor.r + 50, _defaultColor.b, _defaultColor.b, _defaultColor.a);
+            //_rend = GetComponent<Renderer>();
+            //_defaultColor = _rend.material.color;
+            //_hightlightColor = new Color(_defaultColor.r + 50, _defaultColor.b, _defaultColor.b, _defaultColor.a);
         }
 
         // Update is called once per frame
@@ -74,13 +74,13 @@ namespace WizardCube
 	            {
 	                if (_blockLimiter.canRaise)
 	                {
-	                    _rend.material.color = _hightlightColor;
+	                    //_rend.material.color = _hightlightColor;
 	                    if (Input.GetMouseButtonDown(0))
 	                    {
 	                        Vector3 v = transform.position;
 	                        v.y = 1.1f;
 	                        transform.position = v;
-	                        _navMeshObstacle.enabled = true;
+	                        //_navMeshObstacle.enabled = true;
 	                        blockRaised = true;
 	                        _blockLimiter.setRaised(1);
 	                        AstarPath.active.UpdateGraphs(_guo);
@@ -92,13 +92,13 @@ namespace WizardCube
 					
 					// Highlight the block on mouse over
 					if (!turretPlaced) {
-						_rend.material.color = _hightlightColor;
+						//_rend.material.color = _hightlightColor;
 					}
 
 					// Lower the block
 					if (Input.GetMouseButtonDown(0) && !turretPlaced)
 	                {
-	                    _navMeshObstacle.enabled = false;
+	                    //_navMeshObstacle.enabled = false;
 	                    Vector3 v = transform.position;
 	                    v.y = 0.5f;
 	                    transform.position = v;
@@ -122,7 +122,7 @@ namespace WizardCube
 
         void OnMouseExit()
         {
-            _rend.material.color = _defaultColor;
+            //_rend.material.color = _defaultColor;
         }
     }
 }
