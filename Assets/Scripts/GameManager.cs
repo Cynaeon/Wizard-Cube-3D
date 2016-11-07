@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Pathfinding;
 
 namespace WizardCube
 {
@@ -25,6 +26,10 @@ namespace WizardCube
 
         [SerializeField]
         private List<GameObject> _enemies;
+
+        [SerializeField]
+        private GameObject _noControlBlockPrefab;
+        private GraphUpdateObject _guo;
 
         public StateManager StateManager { get; private set; }
         //...and so on.
@@ -71,6 +76,14 @@ namespace WizardCube
             {
                 enemy.GetComponent<AILerp>().canMove = true;
             }
+        }
+
+        public void AddCube(Vector3 positionToAdd)
+        {
+            GameObject placedBlock = Instantiate(_noControlBlockPrefab, positionToAdd, _noControlBlockPrefab.transform.rotation) as GameObject;
+            _guo = new GraphUpdateObject(placedBlock.GetComponent<Collider>().bounds);
+            _guo.updatePhysics = true;
+            AstarPath.active.UpdateGraphs(_guo);
         }
     }
 }

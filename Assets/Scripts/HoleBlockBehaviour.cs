@@ -8,11 +8,13 @@ namespace WizardCube
         private Rigidbody _rigidBody;
         private float _countdown;
         private bool _timeUntilFall;
+        private Vector3 positionAtStart;
 
         private void Awake()
         {
             _rigidBody = GetComponentInParent<Rigidbody>();
             _countdown = 0.5f;
+            positionAtStart = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
 
         // Use this for initialization
@@ -38,6 +40,7 @@ namespace WizardCube
 
             if (transform.position.y <= -4)
             {
+                GameManager.Instance.AddCube(positionAtStart);
                 Destroy(transform.parent.gameObject);
             }
         }
