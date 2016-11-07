@@ -14,6 +14,7 @@ namespace WizardCube
         private NavMeshObstacle _navMeshObstacle;
         private GraphUpdateObject _guo;
         private Animator _animator;
+        private Turret _turret;
 
         public GameObject turret;
 
@@ -27,6 +28,7 @@ namespace WizardCube
             _guo = new GraphUpdateObject(GetComponent<Collider>().bounds);
             _guo.updatePhysics = true;
             _animator = GetComponent<Animator>();
+            _turret = GetComponentInChildren<Turret>();
         }
 
         // Use this for initialization
@@ -118,6 +120,7 @@ namespace WizardCube
                         _animator.SetTrigger("TurretOn");
                         turretPlaced = true;
 						_blockLimiter.setTurret (1);
+                        _turret.TurretRises();
 					}
 	            }
 			}

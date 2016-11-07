@@ -26,6 +26,7 @@ namespace WizardCube
 
         [SerializeField]
         private List<GameObject> _enemies;
+        private Turret[] _turrets;
 
         [SerializeField]
         private GameObject _noControlBlockPrefab;
@@ -57,6 +58,7 @@ namespace WizardCube
             //Use this for initialization of required GameManager parts.
             InitializeStateManager();
             CheckAll();
+            _turrets = FindObjectsOfType(typeof(Turret)) as Turret[];
         }
 
         private void InitializeStateManager ()
@@ -121,6 +123,14 @@ namespace WizardCube
             {
                 Debug.Log("Victory!");
                 Debug.Break();
+            }
+        }
+
+        public void FireTheTurrets()
+        {
+            foreach(Turret tur in _turrets)
+            {
+                tur.ToggleSafety(true);
             }
         }
     }
