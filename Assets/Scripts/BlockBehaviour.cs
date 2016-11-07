@@ -13,6 +13,7 @@ namespace WizardCube
         private BlockLimiter _blockLimiter;
         private NavMeshObstacle _navMeshObstacle;
         private GraphUpdateObject _guo;
+        private Animator _animator;
 
         public GameObject turret;
 
@@ -25,6 +26,7 @@ namespace WizardCube
             //_navMeshObstacle = GetComponent<NavMeshObstacle>();
             _guo = new GraphUpdateObject(GetComponent<Collider>().bounds);
             _guo.updatePhysics = true;
+            _animator = GetComponent<Animator>();
         }
 
         // Use this for initialization
@@ -110,10 +112,11 @@ namespace WizardCube
 					// Create turret at the clicked block's location
 					if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
 					{
-						Vector3 pos = new Vector3 (transform.position.x, transform.position.y + 0.75f, transform.position.z);
+                        /*Vector3 pos = new Vector3 (transform.position.x, transform.position.y + 0.75f, transform.position.z);
 						Quaternion rot = new Quaternion (0, 0, 0, 0);
-						Instantiate (turret, pos, rot);
-						turretPlaced = true;
+						Instantiate (turret, pos, rot);*/
+                        _animator.SetTrigger("TurretOn");
+                        turretPlaced = true;
 						_blockLimiter.setTurret (1);
 					}
 	            }
