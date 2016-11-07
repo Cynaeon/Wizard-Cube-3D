@@ -6,10 +6,13 @@ namespace WizardCube
     public class HoleBlockBehaviour : MonoBehaviour
     {
         private Rigidbody _rigidBody;
+        private float _countdown;
+        private bool _timeUntilFall;
 
         private void Awake()
         {
             _rigidBody = GetComponentInParent<Rigidbody>();
+            _countdown = 0.5f;
         }
 
         // Use this for initialization
@@ -21,6 +24,18 @@ namespace WizardCube
         // Update is called once per frame
         void Update()
         {
+            if (_timeUntilFall)
+            {
+                if (_countdown <= 0)
+                {
+                    FallDown();
+                }
+                else
+                {
+                    _countdown -= Time.deltaTime;
+                }
+            }
+
             if (transform.position.y <= -4)
             {
                 Destroy(transform.parent.gameObject);
@@ -31,12 +46,19 @@ namespace WizardCube
         {
             if (other.gameObject.tag == "Enemy")
             {
-                other.gameObject.GetComponent<EnemyAI>().MovementControl(true);
-                other.gameObject.transform.position = new Vector3(2.5f, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
+                //other.gameObject.GetComponent<EnemyAI>().ChangeTarget(transform);
+                //other.gameObject.transform.position = new Vector3(2.5f, other.gameObject.transform.position.y, other.gameObject.transform.position.z);
                 other.gameObject.transform.SetParent(transform);
-                _rigidBody.isKinematic = false;
-                _rigidBody.useGravity = true;
+                _timeUntilFall = true;
+                //_rigidBody.isKinematic = false;
+                //_rigidBody.useGravity = true;
             }
+        }
+
+        void FallDown()
+        {
+            _rigidBody.isKinematic = false;
+            _rigidBody.useGravity = true;
         }
     }
 }

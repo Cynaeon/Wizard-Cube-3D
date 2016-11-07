@@ -42,6 +42,7 @@ namespace WizardCube
             }
         }
 
+        // Use this for changing this gameobject's target
         public void ChangeTarget(Transform newTarget)
         {
             _aiLerp.target = newTarget;
