@@ -5,16 +5,21 @@ namespace WizardCube
     public enum StateType
     {
         Error = -1,
+        Menu,
         Preparations,
         Active,
+        Victory,
         GameOver
     }
 
     public enum TransitionType
     {
         Error = -1,
+        MenuToPreparations,
         PreparationsToActive,
+        ActiveToVictory,
         ActiveToGameOver,
+        VictoryToPreparations,
         GameOverToPreparations
     }
 
