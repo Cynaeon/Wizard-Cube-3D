@@ -74,7 +74,8 @@ namespace WizardCube
         {
             foreach(GameObject enemy in _enemies)
             {
-                enemy.GetComponent<AILerp>().canMove = true;
+                //enemy.GetComponent<AILerp>().canMove = true;
+                enemy.GetComponent<EnemyAI>().MovementControl(false);
             }
         }
 
