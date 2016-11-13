@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System;
 using Pathfinding;
+using UnityEngine.SceneManagement;
 
 namespace WizardCube
 {
@@ -17,6 +18,7 @@ namespace WizardCube
                 {
                     _instance = FindObjectOfType<GameManager>();
                 }
+
                 return _instance;
             }
         }
@@ -31,6 +33,7 @@ namespace WizardCube
         [SerializeField]
         private GameObject _noControlBlockPrefab;
         private GraphUpdateObject _guo;
+        private GameObject _victoryWindow;
 
         public StateManager StateManager { get; private set; }
         //...and so on.
@@ -43,6 +46,14 @@ namespace WizardCube
                 _instance = this;
                 Initialize();
             }
+
+            _victoryWindow = GameObject.FindWithTag("VictoryWindow");
+            _victoryWindow.SetActive(false);
+
+            //if (StateManager.CurrentStateType == StateType.Victory)
+            //{
+           //     StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+            //}
         }
 
         protected void OnLevelWasLoaded(int levelIndex)
@@ -66,6 +77,8 @@ namespace WizardCube
             StateManager = new StateManager(new PreparationState());
             StateManager.AddState(new ActiveState());
             StateManager.AddState(new GameOverState());
+            StateManager.AddState(new VictoryState());
+            StateManager.AddState(new MenuState());
         }
 
         private void HandleStateLoaded(StateType type)
@@ -121,9 +134,15 @@ namespace WizardCube
         {
             if (_enemies.Count <= 0)
             {
-                Debug.Log("Victory!");
-                Debug.Break();
+                //Debug.Log("Victory!");
+                //Debug.Break();
+                StateManager.PerformTransition(TransitionType.ActiveToVictory);
             }
+        }
+
+        public void ToggleVictoryWindow()
+        {
+            _victoryWindow.SetActive(true);
         }
 
         public void FireTheTurrets()
@@ -131,6 +150,31 @@ namespace WizardCube
             foreach(Turret tur in _turrets)
             {
                 tur.ToggleSafety(true);
+            }
+        }
+
+        public void MoveToNextStage()
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+
+            Debug.Log(StateManager.CurrentStateType);
+            StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+            Debug.Log(StateManager.CurrentStateType);
+
+            if (currentScene.buildIndex == 2)
+            {
+                //StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
+            }
+            else if (currentScene.buildIndex == 3)
+            {
+                //StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                SceneManager.LoadSceneAsync(4, LoadSceneMode.Single);
+            }
+            else
+            {
+                //StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
             }
         }
     }
