@@ -188,21 +188,21 @@ namespace WizardCube
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
-                LevelBeginSettings();
+                //LevelBeginSettings();
             }
             else if (currentScene.buildIndex == 3)
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(4, LoadSceneMode.Single);
-                LevelBeginSettings();
+                //LevelBeginSettings();
             }
             else
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-                LevelBeginSettings();
+                //LevelBeginSettings();
             }
         }
     }
