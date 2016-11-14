@@ -8,7 +8,7 @@ namespace WizardCube
 
         void Awake()
         {
-            transform.rotation = new Quaternion(-90, 0, 0, 0);
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         }
 
         // Update is called once per frame
@@ -30,7 +30,7 @@ namespace WizardCube
             float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
 
             //Ta Daaa
-            transform.rotation = Quaternion.Euler(new Vector3(-90, 0, -angle));
+            transform.rotation = Quaternion.Euler(new Vector3(-90, 0, -angle + 90));
 			}
 			}
         //magic
