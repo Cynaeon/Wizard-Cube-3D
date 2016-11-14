@@ -107,6 +107,11 @@ namespace WizardCube
         
         public void LevelBeginSettings()
         {
+            Scene currentScene = SceneManager.GetActiveScene();
+            Debug.LogWarning(currentScene.buildIndex);
+
+            if (currentScene.buildIndex >= 2)
+            {
             _turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
             _turretList = Utilities.ConvertToList<Turret>(_turretArray);
 
@@ -115,6 +120,7 @@ namespace WizardCube
 
             _victoryWindow = GameObject.FindWithTag("VictoryWindow");
             _victoryWindow.SetActive(false);
+            }
         }
 
         public void LevelEndSettings()
@@ -169,9 +175,12 @@ namespace WizardCube
 
         public void FireTheTurrets()
         {
-            foreach(Turret tur in _turretArray)
+            if (_turretList.Count <= 0)
             {
-                tur.ToggleSafety(true);
+                foreach (Turret tur in _turretList)
+                {
+                    tur.ToggleSafety(true);
+                }
             }
         }
 
