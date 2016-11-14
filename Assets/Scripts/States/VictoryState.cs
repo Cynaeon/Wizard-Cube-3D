@@ -14,7 +14,9 @@ namespace WizardCube
 
         public override void StateActivated()
         {
-            
+            GameManager.Instance.ToggleVictoryWindow();
+            //Debug.Log("Victory!");
+            //Debug.Break();
         }
     }
 }
