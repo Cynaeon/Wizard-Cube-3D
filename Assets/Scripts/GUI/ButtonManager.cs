@@ -22,6 +22,10 @@ namespace WizardCube
             {
                 GameManager.Instance.StateManager.PerformTransition(TransitionType.VictoryToPreparations);
             }
+            else if (currentForComparison == StateType.GameOver)
+            {
+                GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToPreparations);
+            }
 
             Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);

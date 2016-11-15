@@ -24,9 +24,9 @@ namespace WizardCube
 
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnTriggerEnter(Collider other)
         {
-            if (collision.gameObject.tag == "Enemy")
+            if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "EnemyChild")
             {
                 GameManager.Instance.MoveToGameOver();
             }

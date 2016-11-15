@@ -37,6 +37,7 @@ namespace WizardCube
         private GraphUpdateObject _guo;
         private GameObject _victoryWindow;
         private GameObject _treasure;
+        private int sceneBeforeGameOver;
 
         public StateManager StateManager { get; private set; }
         //...and so on.
@@ -111,7 +112,7 @@ namespace WizardCube
             Scene currentScene = SceneManager.GetActiveScene();
             //Debug.LogWarning(currentScene.buildIndex);
 
-            if (currentScene.buildIndex >= 2)
+            if (currentScene.buildIndex >= 3)
             {
                 _turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
                 _turretList = Utilities.ConvertToList<Turret>(_turretArray);
@@ -224,6 +225,10 @@ namespace WizardCube
         public void MoveToGameOver()
         {
             LevelEndSettings();
+
+            Scene currentScene = SceneManager.GetActiveScene();
+            sceneBeforeGameOver = currentScene.buildIndex;
+
             StateManager.PerformTransition(TransitionType.ActiveToGameOver);
         }
     }
