@@ -12,7 +12,7 @@ namespace WizardCube
             GameManager.Instance.LevelEndSettings();
 
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
-            Debug.LogWarning(currentForComparison);
+            Debug.LogWarning("Current state before transition: " + currentForComparison);
 
             if (currentForComparison == StateType.Active)
             {
@@ -23,6 +23,7 @@ namespace WizardCube
                 GameManager.Instance.StateManager.PerformTransition(TransitionType.VictoryToPreparations);
             }
 
+            Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         }
 
