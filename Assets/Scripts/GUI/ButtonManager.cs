@@ -9,7 +9,21 @@ namespace WizardCube
 
         public void NewGameButton(string level)
         {
-            SceneManager.LoadScene(level);
+            GameManager.Instance.LevelEndSettings();
+
+            StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
+            Debug.LogWarning(currentForComparison);
+
+            if (currentForComparison == StateType.Active)
+            {
+                GameManager.Instance.StateManager.PerformTransition(TransitionType.ActiveToPreparations);
+            }
+            else if (currentForComparison == StateType.Victory)
+            {
+                GameManager.Instance.StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+            }
+
+            SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         }
 
         public void ExitGameButton()
@@ -33,6 +47,7 @@ namespace WizardCube
         {
             Escape();
         }
+
         public void Escape()
         {
             if (Application.loadedLevelName == "stageSelect")

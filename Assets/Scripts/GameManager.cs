@@ -125,8 +125,15 @@ namespace WizardCube
 
         public void LevelEndSettings()
         {
-            _turretList.Clear();
-            _enemyList.Clear();
+            if (_turretList != null)
+            {
+                _turretList.Clear();
+            }
+            
+            if (_enemyList != null)
+            {
+                _enemyList.Clear();
+            }
         }
 
         public void ResumeEnemies()
@@ -189,30 +196,23 @@ namespace WizardCube
         {
             Scene currentScene = SceneManager.GetActiveScene();
 
-            /*Debug.Log(StateManager.CurrentStateType);
-            StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-            Debug.Log(StateManager.CurrentStateType);*/
-
             if (currentScene.buildIndex == 2)
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
-                //LevelBeginSettings();
             }
             else if (currentScene.buildIndex == 3)
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(4, LoadSceneMode.Single);
-                //LevelBeginSettings();
             }
             else
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-                //LevelBeginSettings();
             }
         }
     }
