@@ -37,6 +37,7 @@ namespace WizardCube
         private GraphUpdateObject _guo;
         private GameObject _victoryWindow;
         private GameObject _treasure;
+        private GameObject _beginButton;
 
         public int sceneBeforeGameOver { get; private set; }
 
@@ -125,6 +126,13 @@ namespace WizardCube
                 _victoryWindow.SetActive(false);
 
                 _treasure = GameObject.FindWithTag("Treasure");
+
+                _beginButton = GameObject.Find("BeginButton");
+
+                if (!_beginButton.activeInHierarchy)
+                {
+                    ToggleBeginButton(true);
+                }
 
                 Debug.LogWarning(_treasure.transform.position.x + " " + _treasure.transform.position.y + " " + _treasure.transform.position.z);
             }
@@ -231,6 +239,11 @@ namespace WizardCube
             sceneBeforeGameOver = currentScene.buildIndex;
 
             StateManager.PerformTransition(TransitionType.ActiveToGameOver);
+        }
+
+        public void ToggleBeginButton(bool isVisible)
+        {
+            _beginButton.SetActive(isVisible);
         }
     }
 }
