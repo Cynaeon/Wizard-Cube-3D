@@ -42,7 +42,7 @@ namespace WizardCube
             if (transform.position.y <= -4)
             {
                 GameManager.Instance.AddCube(positionAtStart);
-                GameManager.Instance.ManageEnemyList(enemyInHole);
+                GameManager.Instance.ManageEnemyList(enemyInHole.GetComponent<EnemyAI>());
                 Destroy(transform.parent.gameObject);
             }
         }

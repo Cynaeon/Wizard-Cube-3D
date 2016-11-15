@@ -10,7 +10,7 @@ namespace WizardCube
 
         void Awake()
         {
-            if (tag != "Enemy")
+            /*if (tag != "Enemy")
             {
                 Debug.LogError("The tag of " + gameObject.name + "is not set as Enemy!");
                 Debug.Break();
@@ -22,7 +22,7 @@ namespace WizardCube
                     Debug.LogError("The tag of " + transform.GetChild(0).gameObject.name + "is not set as Enemy!");
                     Debug.Break();
                 }
-            }
+            }*/
         }
 
 	    // Use this for initialization

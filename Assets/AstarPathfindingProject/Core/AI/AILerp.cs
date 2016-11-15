@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Pathfinding;
+using WizardCube;
 
 /** Linearly interpolating movement script.
  * This movement script will follow the path exactly, it uses linear interpolation to move between the waypoints in the path.

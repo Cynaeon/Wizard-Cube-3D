@@ -27,13 +27,16 @@ namespace WizardCube
         public event SceneLoadedDelegate SceneLoaded;
 
         [SerializeField]
-        private List<GameObject> _enemies;
-        private Turret[] _turrets;
+        private EnemyAI[] _enemyArray;
+        private List<EnemyAI> _enemyList;
+        private Turret[] _turretArray;
+        private List<Turret> _turretList;
 
         [SerializeField]
         private GameObject _noControlBlockPrefab;
         private GraphUpdateObject _guo;
         private GameObject _victoryWindow;
+        private GameObject _treasure;
 
         public StateManager StateManager { get; private set; }
         //...and so on.
@@ -46,14 +49,6 @@ namespace WizardCube
                 _instance = this;
                 Initialize();
             }
-
-            _victoryWindow = GameObject.FindWithTag("VictoryWindow");
-            _victoryWindow.SetActive(false);
-
-            //if (StateManager.CurrentStateType == StateType.Victory)
-            //{
-           //     StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-            //}
         }
 
         protected void OnLevelWasLoaded(int levelIndex)
@@ -64,12 +59,17 @@ namespace WizardCube
             }
         }
 
+        
+
         private void Initialize()
         {
             //Use this for initialization of required GameManager parts.
             InitializeStateManager();
+            //_turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
+            //_victoryWindow = GameObject.FindWithTag("VictoryWindow");
+            //_victoryWindow.SetActive(false);
+            LevelBeginSettings();
             CheckAll();
-            _turrets = FindObjectsOfType(typeof(Turret)) as Turret[];
         }
 
         private void InitializeStateManager ()
@@ -89,10 +89,14 @@ namespace WizardCube
         // Checks that enemies and NoControlBlockPrefab have been set
         private void CheckAll()
         {
-            if (_enemies.Count <= 0)
-            {
-                Debug.LogError("No enemies detected in GameManager Enemies list!");
-                Debug.Break();
+            Scene currentScene = SceneManager.GetActiveScene();
+
+            if (currentScene.buildIndex >= 2) {
+                if (_enemyArray.Length <= 0)
+                {
+                    Debug.LogError("No enemies detected in GameManager Enemies list!");
+                    Debug.Break();
+                }
             }
 
             if (_noControlBlockPrefab == null)
@@ -101,12 +105,45 @@ namespace WizardCube
                 Debug.Break();
             }
         }
-        
-        public void ResumeEnemies()
+
+        public void LevelBeginSettings()
         {
-            foreach(GameObject enemy in _enemies)
+            Scene currentScene = SceneManager.GetActiveScene();
+            //Debug.LogWarning(currentScene.buildIndex);
+
+            if (currentScene.buildIndex >= 2)
             {
-                enemy.GetComponent<EnemyAI>().MovementControl(false);
+                _turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
+                _turretList = Utilities.ConvertToList<Turret>(_turretArray);
+
+                _enemyArray = FindObjectsOfType(typeof(EnemyAI)) as EnemyAI[];
+                _enemyList = Utilities.ConvertToList<EnemyAI>(_enemyArray);
+
+                _victoryWindow = GameObject.FindWithTag("VictoryWindow");
+                _victoryWindow.SetActive(false);
+
+                _treasure = GameObject.FindWithTag("Treasure");
+            }
+        }
+
+        public void LevelEndSettings()
+        {
+            if (_turretList != null)
+            {
+                _turretList.Clear();
+            }
+            
+            if (_enemyList != null)
+            {
+                _enemyList.Clear();
+            }
+        }
+
+        public void ControlEnemyMovement(bool haltMovement)
+        {
+            foreach(EnemyAI enemy in _enemyArray)
+            {
+                enemy.GetComponent<EnemyAI>().MovementControl(haltMovement);
             }
         }
 
@@ -118,25 +155,27 @@ namespace WizardCube
             AstarPath.active.UpdateGraphs(_guo);
         }
 
-        public void ManageEnemyList(GameObject enemyToRemove)
+        public void ManageEnemyList(EnemyAI enemyToRemove)
         {
-            if (_enemies.Count != 0)
+            if (_enemyArray.Length != 0)
             {
-                if (_enemies.Contains(enemyToRemove))
+                if (_enemyList.Contains(enemyToRemove))
                 {
-                    _enemies.Remove(enemyToRemove);
+                    _enemyList.Remove(enemyToRemove);
                     CheckVictory();
                 }
             }
+            
         }
 
         public void CheckVictory()
         {
-            if (_enemies.Count <= 0)
+            if (_enemyList.Count <= 0)
             {
                 //Debug.Log("Victory!");
                 //Debug.Break();
                 StateManager.PerformTransition(TransitionType.ActiveToVictory);
+				Debug.Log ("Kek");
             }
         }
 
@@ -147,9 +186,12 @@ namespace WizardCube
 
         public void FireTheTurrets()
         {
-            foreach(Turret tur in _turrets)
+            if (_turretList.Count <= 0)
             {
-                tur.ToggleSafety(true);
+                foreach (Turret tur in _turretList)
+                {
+                    tur.ToggleSafety(true);
+                }
             }
         }
 
@@ -157,23 +199,22 @@ namespace WizardCube
         {
             Scene currentScene = SceneManager.GetActiveScene();
 
-            Debug.Log(StateManager.CurrentStateType);
-            StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-            Debug.Log(StateManager.CurrentStateType);
-
             if (currentScene.buildIndex == 2)
             {
-                //StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                LevelEndSettings();
+                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
             }
             else if (currentScene.buildIndex == 3)
             {
-                //StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                LevelEndSettings();
+                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(4, LoadSceneMode.Single);
             }
             else
             {
-                //StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                LevelEndSettings();
+                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
             }
         }
