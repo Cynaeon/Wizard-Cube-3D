@@ -14,7 +14,7 @@ namespace WizardCube
 
         public override void StateActivated()
         {
-            GameManager.Instance.ResumeEnemies();
+            GameManager.Instance.ControlEnemyMovement(false);
             GameManager.Instance.FireTheTurrets();
         }
     }

@@ -36,6 +36,7 @@ namespace WizardCube
         private GameObject _noControlBlockPrefab;
         private GraphUpdateObject _guo;
         private GameObject _victoryWindow;
+        private GameObject _treasure;
 
         public StateManager StateManager { get; private set; }
         //...and so on.
@@ -104,7 +105,7 @@ namespace WizardCube
                 Debug.Break();
             }
         }
-        
+
         public void LevelBeginSettings()
         {
             Scene currentScene = SceneManager.GetActiveScene();
@@ -112,14 +113,16 @@ namespace WizardCube
 
             if (currentScene.buildIndex >= 2)
             {
-            _turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
-            _turretList = Utilities.ConvertToList<Turret>(_turretArray);
+                _turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
+                _turretList = Utilities.ConvertToList<Turret>(_turretArray);
 
-            _enemyArray = FindObjectsOfType(typeof(EnemyAI)) as EnemyAI[];
-            _enemyList = Utilities.ConvertToList<EnemyAI>(_enemyArray);
+                _enemyArray = FindObjectsOfType(typeof(EnemyAI)) as EnemyAI[];
+                _enemyList = Utilities.ConvertToList<EnemyAI>(_enemyArray);
 
-            _victoryWindow = GameObject.FindWithTag("VictoryWindow");
-            _victoryWindow.SetActive(false);
+                _victoryWindow = GameObject.FindWithTag("VictoryWindow");
+                _victoryWindow.SetActive(false);
+
+                _treasure = GameObject.FindWithTag("Treasure");
             }
         }
 
@@ -136,11 +139,11 @@ namespace WizardCube
             }
         }
 
-        public void ResumeEnemies()
+        public void ControlEnemyMovement(bool haltMovement)
         {
             foreach(EnemyAI enemy in _enemyArray)
             {
-                enemy.GetComponent<EnemyAI>().MovementControl(false);
+                enemy.GetComponent<EnemyAI>().MovementControl(haltMovement);
             }
         }
 
