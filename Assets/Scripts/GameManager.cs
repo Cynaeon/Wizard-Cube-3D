@@ -123,6 +123,8 @@ namespace WizardCube
                 _victoryWindow.SetActive(false);
 
                 _treasure = GameObject.FindWithTag("Treasure");
+
+                Debug.LogWarning(_treasure.transform.position.x + " " + _treasure.transform.position.y + " " + _treasure.transform.position.z);
             }
         }
 
@@ -199,17 +201,17 @@ namespace WizardCube
         {
             Scene currentScene = SceneManager.GetActiveScene();
 
-            if (currentScene.buildIndex == 2)
-            {
-                LevelEndSettings();
-                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-                SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
-            }
-            else if (currentScene.buildIndex == 3)
+            if (currentScene.buildIndex == 3)
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(4, LoadSceneMode.Single);
+            }
+            else if (currentScene.buildIndex == 4)
+            {
+                LevelEndSettings();
+                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                SceneManager.LoadSceneAsync(5, LoadSceneMode.Single);
             }
             else
             {
@@ -217,6 +219,12 @@ namespace WizardCube
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
             }
+        }
+
+        public void MoveToGameOver()
+        {
+            LevelEndSettings();
+            StateManager.PerformTransition(TransitionType.ActiveToGameOver);
         }
     }
 }

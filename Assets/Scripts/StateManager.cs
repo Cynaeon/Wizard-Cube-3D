@@ -22,7 +22,8 @@ namespace WizardCube
         ActiveToPreparations,
         VictoryToPreparations,
         VictoryToMenu,
-        GameOverToPreparations
+        GameOverToPreparations,
+        GameOverToMenu
     }
 
     public class StateManager

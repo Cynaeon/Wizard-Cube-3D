@@ -1,15 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TreasureBehavior : MonoBehaviour {
+namespace WizardCube
+{
+    public class TreasureBehavior : MonoBehaviour
+    {
+        
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        private void Awake()
+        {
+
+        }
+
+        // Use this for initialization
+        void Start()
+        {
+
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                GameManager.Instance.MoveToGameOver();
+            }
+        }
+    }
 }
