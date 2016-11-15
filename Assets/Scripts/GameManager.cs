@@ -165,6 +165,7 @@ namespace WizardCube
                 //Debug.Log("Victory!");
                 //Debug.Break();
                 StateManager.PerformTransition(TransitionType.ActiveToVictory);
+				Debug.Log ("Kek");
             }
         }
 
