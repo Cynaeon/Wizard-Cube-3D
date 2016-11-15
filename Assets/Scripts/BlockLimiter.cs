@@ -5,7 +5,7 @@ namespace WizardCube
 {
     public class BlockLimiter : MonoBehaviour
     {
-        [Range(1, 10)]
+        [Range(1, 20)]
         public int maxRaisedAmount = 5;
         public int _raised;
 
