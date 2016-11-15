@@ -6,9 +6,11 @@ namespace WizardCube
 {
     public class BlockBehaviour : MonoBehaviour
     {
-
+        [SerializeField]
+        private GameObject _changeThisRenderer;
         private Renderer _rend;
         private Color _defaultColor;
+        private Color _defaultColorTwo;
         private Color _hightlightColor;
         private BlockLimiter _blockLimiter;
         private NavMeshObstacle _navMeshObstacle;
@@ -34,9 +36,9 @@ namespace WizardCube
         // Use this for initialization
         void Start()
         {
-            //_rend = GetComponent<Renderer>();
-            //_defaultColor = _rend.material.color;
-            //_hightlightColor = new Color(_defaultColor.r + 50, _defaultColor.b, _defaultColor.b, _defaultColor.a);
+            _rend = _changeThisRenderer.GetComponent<Renderer>();
+            _defaultColor = _rend.material.color;
+            _hightlightColor = new Color(_defaultColor.r + 50, _defaultColor.b, _defaultColor.b, _defaultColor.a);
         }
 
         // Update is called once per frame
@@ -78,7 +80,8 @@ namespace WizardCube
 	            {
 	                if (_blockLimiter.canRaise)
 	                {
-	                    //_rend.material.color = _hightlightColor;
+	                    _rend.material.color = _hightlightColor;
+
 	                    if (Input.GetMouseButtonDown(0))
 	                    {
 	                        Vector3 v = transform.position;
@@ -96,7 +99,7 @@ namespace WizardCube
 					
 					// Highlight the block on mouse over
 					if (!turretPlaced) {
-						//_rend.material.color = _hightlightColor;
+						_rend.material.color = _hightlightColor;
 					}
 
 					// Lower the block
@@ -128,7 +131,7 @@ namespace WizardCube
 
         void OnMouseExit()
         {
-            //_rend.material.color = _defaultColor;
+            _rend.material.color = _defaultColor;
         }
     }
 }
