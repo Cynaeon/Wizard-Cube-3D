@@ -31,6 +31,15 @@ namespace WizardCube
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         }
 
+        public void RetryGameOverButton()
+        {
+            int lastSceneBuildIndex = GameManager.Instance.sceneBeforeGameOver;
+            Debug.LogWarning(lastSceneBuildIndex);
+
+            GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToPreparations);
+            SceneManager.LoadSceneAsync(lastSceneBuildIndex, LoadSceneMode.Single);
+        }
+
         public void ExitGameButton()
         {
             Application.Quit();

@@ -37,7 +37,8 @@ namespace WizardCube
         private GraphUpdateObject _guo;
         private GameObject _victoryWindow;
         private GameObject _treasure;
-        private int sceneBeforeGameOver;
+
+        public int sceneBeforeGameOver { get; private set; }
 
         public StateManager StateManager { get; private set; }
         //...and so on.
