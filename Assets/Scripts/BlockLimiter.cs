@@ -14,20 +14,27 @@ namespace WizardCube
 
         public bool canRaise;
         public static BlockLimiter instance;
+		public bool beginPressed;
 
         // Use this for initialization
         void Start()
         {
             canRaise = true;
+			beginPressed = false;
             _raised = 0;
             instance = this;
         }
 
+	
+
         // Update is called once per frame
         void Update()
         {
-            CheckRaise();
-        }
+			if (beginPressed == false) {
+				CheckRaise ();
+			}
+		}
+
 
         public void setRaised(int blockRaised)
         {
@@ -40,16 +47,27 @@ namespace WizardCube
 			_turretsPlaced += turretPlaced;
 		}
 
+		public void ChangeBeginState(bool isVisible)
+		{	
+			//if begin button is visible (true) the beginPressed is false (!isVisible) and if begin button is not visible (false) the beginPressed is true (!false)
+			beginPressed = !isVisible;
+			if (isVisible == false) {
+				canRaise = false;
+			}
+		}
+
         void CheckRaise()
         {
-            if (_raised >= maxRaisedAmount)
-            {
-                canRaise = false;
-            }
-            if (_raised < maxRaisedAmount)
-            {
-                canRaise = true;
-            }
-        }
+			
+			if (_raised >= maxRaisedAmount) 
+			{
+				canRaise = false;
+			}
+
+			if (_raised < maxRaisedAmount)
+	        {
+				canRaise = true;
+	        }
+		}
     }
 }
