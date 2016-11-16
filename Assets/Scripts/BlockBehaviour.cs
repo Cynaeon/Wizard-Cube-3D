@@ -6,11 +6,10 @@ namespace WizardCube
 {
     public class BlockBehaviour : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject _changeThisRenderer;
+		[SerializeField]
+		private GameObject _changeThisRenderer;
         private Renderer _rend;
         private Color _defaultColor;
-        private Color _defaultColorTwo;
         private Color _hightlightColor;
         private BlockLimiter _blockLimiter;
         private NavMeshObstacle _navMeshObstacle;
@@ -81,7 +80,6 @@ namespace WizardCube
 	                if (_blockLimiter.canRaise)
 	                {
 	                    _rend.material.color = _hightlightColor;
-
 	                    if (Input.GetMouseButtonDown(0))
 	                    {
 	                        Vector3 v = transform.position;
@@ -94,7 +92,7 @@ namespace WizardCube
 	                    }
 	                }
 	            }
-	            else if (blockRaised)
+				else if (blockRaised && !_blockLimiter.beginPressed)
 	            {
 					
 					// Highlight the block on mouse over
@@ -134,4 +132,5 @@ namespace WizardCube
             _rend.material.color = _defaultColor;
         }
     }
-}
+}     
+	

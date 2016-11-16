@@ -38,6 +38,7 @@ namespace WizardCube
         private GameObject _victoryWindow;
         private GameObject _treasure;
         private GameObject _beginButton;
+		private BlockLimiter _blockLimiter;
 
         public int sceneBeforeGameOver { get; private set; }
 
@@ -187,7 +188,6 @@ namespace WizardCube
                 //Debug.Log("Victory!");
                 //Debug.Break();
                 StateManager.PerformTransition(TransitionType.ActiveToVictory);
-				Debug.Log ("Kek");
             }
         }
 
@@ -244,6 +244,9 @@ namespace WizardCube
         public void ToggleBeginButton(bool isVisible)
         {
             _beginButton.SetActive(isVisible);
+			_blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
+			_blockLimiter.ChangeBeginState (isVisible);
+
         }
     }
 }
