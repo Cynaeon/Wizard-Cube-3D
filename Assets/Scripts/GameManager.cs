@@ -210,24 +210,21 @@ namespace WizardCube
         public void MoveToNextStage()
         {
             Scene currentScene = SceneManager.GetActiveScene();
+            int currentBuildIndex = currentScene.buildIndex;
 
-            if (currentScene.buildIndex == 3)
-            {
-                LevelEndSettings();
-                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-                SceneManager.LoadSceneAsync(4, LoadSceneMode.Single);
-            }
-            else if (currentScene.buildIndex == 4)
-            {
-                LevelEndSettings();
-                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-                SceneManager.LoadSceneAsync(5, LoadSceneMode.Single);
-            }
-            else
+            if (currentScene.buildIndex == 10)
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+            }
+            else
+            {
+                currentBuildIndex++;
+
+                LevelEndSettings();
+                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                SceneManager.LoadSceneAsync(currentBuildIndex, LoadSceneMode.Single);
             }
         }
 
