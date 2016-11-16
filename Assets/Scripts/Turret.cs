@@ -28,6 +28,7 @@ namespace WizardCube
                         // Check if there are enemies
                         GameObject[] gos;
                         gos = GameObject.FindGameObjectsWithTag("Enemy");
+                        Debug.LogWarning(gos.Length);
 
                         // Create a bullet
                         if (gos.Length > 0)
@@ -45,6 +46,7 @@ namespace WizardCube
         public void TurretRises()
         {
             _isUp = true;
+            Debug.LogWarning(_isUp);
         }
 
         public void ToggleSafety(bool shouldTurretFire)
@@ -52,10 +54,12 @@ namespace WizardCube
             if (shouldTurretFire)
             {
                 _canFire = true;
+                Debug.LogWarning(_canFire);
             }
             else
             {
                 _canFire = false;
+                Debug.LogWarning(_canFire);
             }
         }
 	}

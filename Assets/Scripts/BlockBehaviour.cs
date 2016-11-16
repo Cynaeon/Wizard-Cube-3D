@@ -121,8 +121,13 @@ namespace WizardCube
                         _animator.SetTrigger("TurretOn");
                         turretPlaced = true;
 						_blockLimiter.setTurret (1);
+                        Debug.LogWarning("The name of the gameobject is: " + _turret.gameObject.name + " and its parent is named: " + _turret.gameObject.transform.parent.name);
                         _turret.TurretRises();
-					}
+
+                        
+                        
+                        
+                    }
 	            }
 			}
         }

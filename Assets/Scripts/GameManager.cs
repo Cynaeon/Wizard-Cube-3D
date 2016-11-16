@@ -152,6 +152,11 @@ namespace WizardCube
             }
         }
 
+        public void AddTurretToList()
+        {
+
+        }
+
         public void ControlEnemyMovement(bool haltMovement)
         {
             foreach(EnemyAI enemy in _enemyArray)
@@ -198,6 +203,7 @@ namespace WizardCube
 
         public void FireTheTurrets()
         {
+            Debug.LogWarning("Script goes to FireTheTurrets()");
             if (_turretList.Count <= 0)
             {
                 foreach (Turret tur in _turretList)
