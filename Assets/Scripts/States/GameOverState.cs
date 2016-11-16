@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace WizardCube
 {
@@ -7,12 +8,14 @@ namespace WizardCube
     {
         public GameOverState() : base()
         {
-
+            State = StateType.GameOver;
+            AddTransition(TransitionType.GameOverToPreparations, StateType.Preparations);
+            AddTransition(TransitionType.GameOverToMenu, StateType.Menu);
         }
 
         public override void StateActivated()
         {
-            //Make the game go to Game Over
+            SceneManager.LoadSceneAsync(2, LoadSceneMode.Single);
         }
     }
 }

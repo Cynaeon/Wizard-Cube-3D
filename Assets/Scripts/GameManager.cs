@@ -37,6 +37,9 @@ namespace WizardCube
         private GraphUpdateObject _guo;
         private GameObject _victoryWindow;
         private GameObject _treasure;
+        private GameObject _beginButton;
+
+        public int sceneBeforeGameOver { get; private set; }
 
         public StateManager StateManager { get; private set; }
         //...and so on.
@@ -111,7 +114,7 @@ namespace WizardCube
             Scene currentScene = SceneManager.GetActiveScene();
             //Debug.LogWarning(currentScene.buildIndex);
 
-            if (currentScene.buildIndex >= 2)
+            if (currentScene.buildIndex >= 3)
             {
                 _turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
                 _turretList = Utilities.ConvertToList<Turret>(_turretArray);
@@ -123,6 +126,15 @@ namespace WizardCube
                 _victoryWindow.SetActive(false);
 
                 _treasure = GameObject.FindWithTag("Treasure");
+
+                _beginButton = GameObject.Find("BeginButton");
+
+                if (!_beginButton.activeInHierarchy)
+                {
+                    ToggleBeginButton(true);
+                }
+
+                Debug.LogWarning(_treasure.transform.position.x + " " + _treasure.transform.position.y + " " + _treasure.transform.position.z);
             }
         }
 
@@ -199,17 +211,17 @@ namespace WizardCube
         {
             Scene currentScene = SceneManager.GetActiveScene();
 
-            if (currentScene.buildIndex == 2)
-            {
-                LevelEndSettings();
-                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-                SceneManager.LoadSceneAsync(3, LoadSceneMode.Single);
-            }
-            else if (currentScene.buildIndex == 3)
+            if (currentScene.buildIndex == 3)
             {
                 LevelEndSettings();
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(4, LoadSceneMode.Single);
+            }
+            else if (currentScene.buildIndex == 4)
+            {
+                LevelEndSettings();
+                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+                SceneManager.LoadSceneAsync(5, LoadSceneMode.Single);
             }
             else
             {
@@ -217,6 +229,21 @@ namespace WizardCube
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
             }
+        }
+
+        public void MoveToGameOver()
+        {
+            LevelEndSettings();
+
+            Scene currentScene = SceneManager.GetActiveScene();
+            sceneBeforeGameOver = currentScene.buildIndex;
+
+            StateManager.PerformTransition(TransitionType.ActiveToGameOver);
+        }
+
+        public void ToggleBeginButton(bool isVisible)
+        {
+            _beginButton.SetActive(isVisible);
         }
     }
 }
