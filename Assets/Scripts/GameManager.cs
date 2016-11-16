@@ -250,5 +250,10 @@ namespace WizardCube
 			_blockLimiter.ChangeBeginState (isVisible);
 
         }
+
+        public List<EnemyAI> GiveEnemyList()
+        {
+            return _enemyList;
+        }
     }
 }

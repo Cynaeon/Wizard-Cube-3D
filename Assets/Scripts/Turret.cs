@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace WizardCube
 {
@@ -26,12 +27,13 @@ namespace WizardCube
                     if (timeStamp <= Time.time)
                     {
                         // Check if there are enemies
-                        GameObject[] gos;
-                        gos = GameObject.FindGameObjectsWithTag("Enemy");
-                        Debug.LogWarning(gos.Length);
+                        //GameObject[] gos;
+                        //gos = GameObject.FindGameObjectsWithTag("Enemy");
+                        List<EnemyAI> _enemyList = GameManager.Instance.GiveEnemyList();
+                        Debug.LogWarning(_enemyList.Count);
 
                         // Create a bullet
-                        if (gos.Length > 0)
+                        if (_enemyList.Count > 0)
                         {
                             Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
                             Quaternion rot = new Quaternion(0, 0, 0, 0);

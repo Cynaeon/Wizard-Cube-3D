@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace WizardCube
 {
@@ -15,16 +16,17 @@ namespace WizardCube
 		}
 
 		GameObject FindClosestEnemy() {
-			GameObject[] gos;
-			gos = GameObject.FindGameObjectsWithTag("Enemy");
+            //GameObject[] gos;
+            //gos = GameObject.FindGameObjectsWithTag("Enemy");
+            List<EnemyAI> _enemyList = GameManager.Instance.GiveEnemyList();
 			GameObject closest = null;
 			float distance = Mathf.Infinity;
 			Vector3 position = transform.position;
-			foreach (GameObject go in gos) {
-				Vector3 diff = go.transform.position - position;
+			foreach (EnemyAI enemy in _enemyList) {
+				Vector3 diff = enemy.gameObject.transform.position - position;
 				float curDistance = diff.sqrMagnitude;
 				if (curDistance < distance) {
-					closest = go;
+					closest = enemy.gameObject;
 					distance = curDistance;
 				}
 			}
