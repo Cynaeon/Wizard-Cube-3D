@@ -47,7 +47,8 @@ namespace WizardCube
 
         public void NextLevelButton()
         {
-            GameManager.Instance.MoveToNextStage();
+            //GameManager.Instance.MoveToNextStage();
+            GameManager.Instance.LevelManager.MoveToNextStage();
         }
 
         // Use this for initialization

@@ -43,6 +43,7 @@ namespace WizardCube
         public int sceneBeforeGameOver { get; private set; }
 
         public StateManager StateManager { get; private set; }
+        public LevelManager LevelManager { get; private set; }
         //...and so on.
 
         private void Awake()
@@ -69,6 +70,7 @@ namespace WizardCube
         {
             //Use this for initialization of required GameManager parts.
             InitializeStateManager();
+            LevelManager = new LevelManager();
             //_turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
             //_victoryWindow = GameObject.FindWithTag("VictoryWindow");
             //_victoryWindow.SetActive(false);
@@ -220,7 +222,7 @@ namespace WizardCube
             }
         }
 
-        public void MoveToNextStage()
+        /*public void MoveToNextStage()
         {
             Scene currentScene = SceneManager.GetActiveScene();
             int currentBuildIndex = currentScene.buildIndex;
@@ -239,7 +241,7 @@ namespace WizardCube
                 StateManager.PerformTransition(TransitionType.VictoryToPreparations);
                 SceneManager.LoadSceneAsync(currentBuildIndex, LoadSceneMode.Single);
             }
-        }
+        }*/
 
         public void MoveToGameOver()
         {
