@@ -8,21 +8,11 @@ namespace WizardCube
         [SerializeField]
         private AILerp _aiLerp;
 
+        public int health = 10;
+
         void Awake()
         {
-            /*if (tag != "Enemy")
-            {
-                Debug.LogError("The tag of " + gameObject.name + "is not set as Enemy!");
-                Debug.Break();
-            }
-            else if (tag == "Enemy")
-            {
-                if (transform.GetChild(0).tag != "Enemy")
-                {
-                    Debug.LogError("The tag of " + transform.GetChild(0).gameObject.name + "is not set as Enemy!");
-                    Debug.Break();
-                }
-            }*/
+            
         }
 
 	    // Use this for initialization
@@ -38,8 +28,21 @@ namespace WizardCube
 	    // Update is called once per frame
 	    void Update ()
         {
-            
-	    }
+            if (health < 1)
+            {
+                GameManager.Instance.ManageEnemyList(this);
+                Destroy(this.gameObject);
+            }
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Bullet")
+            {
+                health -= 1;
+                Destroy(other.gameObject);
+            }
+        }
 
         // Use this when you want to either make this gameobject move or stop moving
         public void MovementControl(bool haltMovement)
