@@ -165,6 +165,14 @@ namespace WizardCube
             }
         }
 
+        public void ControlEnemySearch(bool shouldEnemySearch)
+        {
+            foreach (EnemyAI enemy in _enemyArray)
+            {
+                enemy.GetComponent<EnemyAI>().SearchControl(shouldEnemySearch);
+            }
+        }
+
         public void AddCube(Vector3 positionToAdd)
         {
             GameObject placedBlock = Instantiate(_noControlBlockPrefab, positionToAdd, _noControlBlockPrefab.transform.rotation) as GameObject;

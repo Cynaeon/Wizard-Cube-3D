@@ -54,6 +54,18 @@ namespace WizardCube
             }
         }
 
+        public void SearchControl(bool shouldEnemySearch)
+        {
+            if (shouldEnemySearch)
+            {
+                _aiLerp.canSearch = true;
+            }
+            else if (!shouldEnemySearch)
+            {
+                _aiLerp.canSearch = false;
+            }
+        }
+
         // Use this for changing this gameobject's target
         public void ChangeTarget(Transform newTarget)
         {

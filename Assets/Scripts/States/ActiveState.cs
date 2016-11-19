@@ -16,6 +16,7 @@ namespace WizardCube
         {
             GameManager.Instance.ToggleBeginButton(false);
             GameManager.Instance.ControlEnemyMovement(false);
+            GameManager.Instance.ControlEnemySearch(false);
             GameManager.Instance.FireTheTurrets();
         }
     }

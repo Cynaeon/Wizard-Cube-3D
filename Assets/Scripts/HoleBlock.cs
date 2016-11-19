@@ -22,6 +22,7 @@ namespace WizardCube
         {
             if (other.gameObject.tag == "Enemy")
             {
+                other.gameObject.GetComponent<EnemyAI>().SearchControl(true);
                 other.gameObject.GetComponent<EnemyAI>().ChangeTarget(transform);
             }
         }
