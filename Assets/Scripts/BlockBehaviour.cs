@@ -109,7 +109,8 @@ namespace WizardCube
 	                    transform.position = v;
 	                    blockRaised = false;
 	                    _blockLimiter.setRaised(-1);
-	                    AstarPath.active.UpdateGraphs(_guo);
+	                    //AstarPath.active.UpdateGraphs(_guo);
+                        AstarPath.active.Scan();
 	                }
 
 					// Create turret at the clicked block's location
