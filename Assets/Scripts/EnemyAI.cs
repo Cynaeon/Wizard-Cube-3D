@@ -8,7 +8,7 @@ namespace WizardCube
         [SerializeField]
         private AILerp _aiLerp;
 
-        public int health = 10;
+        public int health = 5;
 
         void Awake()
         {

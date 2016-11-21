@@ -56,6 +56,18 @@ namespace WizardCube
             }
         }
 
+        private void FixedUpdate()
+        {
+            // Fast forwarding
+            if (Input.GetButton("Fire1"))
+            {
+                Time.timeScale = 4.0f;
+            } else
+            {
+                Time.timeScale = 1.0f;
+            }
+        }
+
         protected void OnLevelWasLoaded(int levelIndex)
         {
             if (SceneLoaded != null)
