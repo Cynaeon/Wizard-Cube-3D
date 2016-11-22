@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 namespace WizardCube
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager
     {
         public void MoveToNextStage()
         {

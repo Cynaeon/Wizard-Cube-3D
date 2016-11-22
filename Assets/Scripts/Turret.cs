@@ -56,12 +56,12 @@ namespace WizardCube
             if (shouldTurretFire)
             {
                 _canFire = true;
-                Debug.LogWarning(_canFire);
+                //Debug.LogWarning(_canFire);
             }
             else
             {
                 _canFire = false;
-                Debug.LogWarning(_canFire);
+                //Debug.LogWarning(_canFire);
             }
         }
 	}

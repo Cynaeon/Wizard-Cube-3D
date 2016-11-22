@@ -12,10 +12,12 @@ namespace WizardCube
         private Color _defaultColor;
         private Color _hightlightColor;
         private BlockLimiter _blockLimiter;
-        private NavMeshObstacle _navMeshObstacle;
         private GraphUpdateObject _guo;
         private Animator _animator;
         private Turret _turret;
+
+        private int _groundLayerNumber = 9;
+        private int _obstacleLayerNumber = 10;
 
         public GameObject turret;
 
@@ -25,7 +27,6 @@ namespace WizardCube
         void Awake()
         {
             _blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
-            //_navMeshObstacle = GetComponent<NavMeshObstacle>();
             _guo = new GraphUpdateObject(GetComponent<Collider>().bounds);
             _guo.updatePhysics = true;
             _animator = GetComponent<Animator>();
@@ -85,9 +86,9 @@ namespace WizardCube
 	                        Vector3 v = transform.position;
 	                        v.y = 1.1f;
 	                        transform.position = v;
-	                        //_navMeshObstacle.enabled = true;
 	                        blockRaised = true;
 	                        _blockLimiter.setRaised(1);
+                            gameObject.layer = _obstacleLayerNumber;
 	                        AstarPath.active.UpdateGraphs(_guo);
 	                    }
 	                }
@@ -103,12 +104,12 @@ namespace WizardCube
 					// Lower the block
 					if (Input.GetMouseButtonDown(0) && !turretPlaced)
 	                {
-	                    //_navMeshObstacle.enabled = false;
 	                    Vector3 v = transform.position;
 	                    v.y = 0.5f;
 	                    transform.position = v;
 	                    blockRaised = false;
 	                    _blockLimiter.setRaised(-1);
+                        gameObject.layer = _groundLayerNumber;
 	                    //AstarPath.active.UpdateGraphs(_guo);
                         AstarPath.active.Scan();
 	                }
