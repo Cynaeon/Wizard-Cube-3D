@@ -8,11 +8,13 @@ namespace WizardCube
         [SerializeField]
         private AILerp _aiLerp;
 
+        private Seeker _seeker;
+
         public int health = 5;
 
         void Awake()
         {
-            
+            _seeker = GetComponent<Seeker>();
         }
 
 	    // Use this for initialization
@@ -73,6 +75,11 @@ namespace WizardCube
         public void ChangeTarget(Transform newTarget)
         {
             _aiLerp.target = newTarget;
+        }
+
+        public void ForcePathSearch()
+        {
+            _aiLerp.ForceSearchPath();
         }
     }
 }

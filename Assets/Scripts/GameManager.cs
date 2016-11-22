@@ -277,5 +277,21 @@ namespace WizardCube
         {
             return _enemyList;
         }
+
+        public void ForceUpdateEnemyPaths()
+        {
+            foreach (EnemyAI enemy in _enemyList)
+            {
+                enemy.ForcePathSearch();
+            }
+        }
+
+        public void ChangeEnemyTargets()
+        {
+            foreach (EnemyAI enemy in _enemyList)
+            {
+                enemy.ChangeTarget(_treasure.transform);
+            }
+        }
     }
 }
