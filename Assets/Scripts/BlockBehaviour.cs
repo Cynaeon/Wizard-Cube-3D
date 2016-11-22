@@ -8,7 +8,10 @@ namespace WizardCube
     {
 		[SerializeField]
 		private GameObject _changeThisRenderer;
+		[SerializeField]
+		private GameObject _changeThisToo;
         private Renderer _rend;
+		private Renderer _rend2;
         private Color _defaultColor;
         private Color _hightlightColor;
         private BlockLimiter _blockLimiter;
@@ -24,6 +27,9 @@ namespace WizardCube
         bool blockRaised = false;
 		bool turretPlaced = false;
 
+		bool rising = false;
+		bool lowering = false;
+
         void Awake()
         {
             _blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
@@ -37,14 +43,23 @@ namespace WizardCube
         void Start()
         {
             _rend = _changeThisRenderer.GetComponent<Renderer>();
+			_rend2 = _changeThisToo.GetComponent<Renderer>();
             _defaultColor = _rend.material.color;
-            _hightlightColor = new Color(_defaultColor.r + 50, _defaultColor.b, _defaultColor.b, _defaultColor.a);
+			_hightlightColor = new Color(_defaultColor.r, _defaultColor.g + 2, _defaultColor.b, _defaultColor.a);
         }
 
         // Update is called once per frame
         void Update()
         {
-
+			if (blockRaised) {
+				Vector3 v = transform.position;
+				v.y = 1.1f;
+				transform.position = Vector3.MoveTowards (transform.position, v, 0.05f);
+			} else {
+				Vector3 v = transform.position;
+				v.y = 0.5f;
+				transform.position = Vector3.MoveTowards (transform.position, v, 0.05f);
+			}
         }
 
         //	void OnMouseOver() {
@@ -80,34 +95,47 @@ namespace WizardCube
 	            {
 	                if (_blockLimiter.canRaise)
 	                {
+						// Highlight the lowered block
 	                    _rend.material.color = _hightlightColor;
-	                    if (Input.GetMouseButtonDown(0))
-	                    {
-	                        Vector3 v = transform.position;
-	                        v.y = 1.1f;
-	                        transform.position = v;
-	                        blockRaised = true;
-	                        _blockLimiter.setRaised(1);
-                            gameObject.layer = _obstacleLayerNumber;
-	                        AstarPath.active.UpdateGraphs(_guo);
-                            gameObject.tag = "RaisedBlock";
-	                    }
+						_rend2.material.color = _hightlightColor;
+
+						if (Input.GetMouseButtonDown(0))
+						{
+							blockRaised = true;
+							_blockLimiter.setRaised(1);
+							gameObject.layer = _obstacleLayerNumber;
+							AstarPath.active.UpdateGraphs(_guo);
+							gameObject.tag = "RaisedBlock";
+						}
+	                    /*
+						if (Input.GetMouseButtonDown(0))
+						{
+							//Raise the block
+							Vector3 v = transform.position;
+							v.y = 1.1f;
+							transform.position = v;
+							blockRaised = true;
+							_blockLimiter.setRaised(1);
+							gameObject.layer = _obstacleLayerNumber;
+							AstarPath.active.UpdateGraphs(_guo);
+							gameObject.tag = "RaisedBlock";
+						}
+						*/
+
 	                }
 	            }
 				else if (blockRaised && !_blockLimiter.beginPressed)
 	            {
 					
-					// Highlight the block on mouse over
+					// Highlight the raised block on mouse over
 					if (!turretPlaced) {
 						_rend.material.color = _hightlightColor;
+						_rend2.material.color = _hightlightColor;
 					}
 
 					// Lower the block
 					if (Input.GetMouseButtonDown(0) && !turretPlaced)
 	                {
-	                    Vector3 v = transform.position;
-	                    v.y = 0.5f;
-	                    transform.position = v;
 	                    blockRaised = false;
 	                    _blockLimiter.setRaised(-1);
                         gameObject.layer = _groundLayerNumber;
@@ -115,6 +143,20 @@ namespace WizardCube
                         AstarPath.active.Scan();
                         gameObject.tag = "Ground";
 	                }
+					/*
+					if (Input.GetMouseButtonDown(0) && !turretPlaced)
+					{
+						Vector3 v = transform.position;
+						v.y = 0.5f;
+						transform.position = v;
+						blockRaised = false;
+						_blockLimiter.setRaised(-1);
+						gameObject.layer = _groundLayerNumber;
+						//AstarPath.active.UpdateGraphs(_guo);
+						AstarPath.active.Scan();
+						gameObject.tag = "Ground";
+					}
+					*/
 
 					// Create turret at the clicked block's location
 					if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
@@ -139,6 +181,7 @@ namespace WizardCube
         void OnMouseExit()
         {
             _rend.material.color = _defaultColor;
+			_rend2.material.color = _defaultColor;
         }
     }
 }     
