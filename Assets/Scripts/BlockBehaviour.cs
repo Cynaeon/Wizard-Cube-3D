@@ -90,6 +90,7 @@ namespace WizardCube
 	                        _blockLimiter.setRaised(1);
                             gameObject.layer = _obstacleLayerNumber;
 	                        AstarPath.active.UpdateGraphs(_guo);
+                            gameObject.tag = "RaisedBlock";
 	                    }
 	                }
 	            }
@@ -112,6 +113,7 @@ namespace WizardCube
                         gameObject.layer = _groundLayerNumber;
 	                    //AstarPath.active.UpdateGraphs(_guo);
                         AstarPath.active.Scan();
+                        gameObject.tag = "Ground";
 	                }
 
 					// Create turret at the clicked block's location
