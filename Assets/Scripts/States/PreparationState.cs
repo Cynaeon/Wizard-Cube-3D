@@ -12,7 +12,7 @@ namespace WizardCube
 
         public override void StateActivated()
         {
-            
+            GameManager.Instance.AudioManager.TransitionToPrep();
         }
     }
 }

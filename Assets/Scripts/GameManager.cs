@@ -44,6 +44,7 @@ namespace WizardCube
 
         public StateManager StateManager { get; private set; }
         public LevelManager LevelManager { get; private set; }
+        public AudioManager AudioManager { get; private set; }
         //...and so on.
 
         private void Awake()
@@ -126,6 +127,7 @@ namespace WizardCube
 
         public void LevelBeginSettings()
         {
+            AudioManager = FindObjectOfType<AudioManager>();
             Scene currentScene = SceneManager.GetActiveScene();
             //Debug.LogWarning(currentScene.buildIndex);
 
