@@ -7,8 +7,8 @@ public class AudioManager : MonoBehaviour {
     public AudioMixerSnapshot action;
     public AudioMixerSnapshot prep;
 
-    private float m_TransitionIn = 2;
-    private float m_TransitionOut = 1;
+    private float m_TransitionIn = 1;
+    private float m_TransitionOut = 2;
 
 	// Use this for initialization
 	void Start () {
