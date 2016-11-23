@@ -4,6 +4,13 @@ using Pathfinding;
 
 namespace WizardCube
 {
+    public enum moveDirection
+    {
+        noMovement,
+        blockGoingUp,
+        blockGoingDown
+    }
+
     public class BlockBehaviour : MonoBehaviour
     {
 		[SerializeField]
@@ -18,6 +25,9 @@ namespace WizardCube
         private GraphUpdateObject _guo;
         private Animator _animator;
         private Turret _turret;
+
+        private moveDirection whereDoesBlockGo;
+        private bool scanGraph;
 
         private int _groundLayerNumber = 9;
         private int _obstacleLayerNumber = 10;
@@ -37,6 +47,7 @@ namespace WizardCube
             _guo.updatePhysics = true;
             _animator = GetComponent<Animator>();
             _turret = GetComponentInChildren<Turret>();
+            whereDoesBlockGo = moveDirection.noMovement;
         }
 
         // Use this for initialization
@@ -51,15 +62,44 @@ namespace WizardCube
         // Update is called once per frame
         void Update()
         {
-			/*if (blockRaised) {
-				Vector3 v = transform.position;
-				v.y = 1.1f;
-				transform.position = Vector3.MoveTowards (transform.position, v, 0.05f);
+			
+            if (blockRaised) {
+                if (rising)
+                {
+                    Vector3 v = transform.position;
+                    v.y = 1.1f;
+                    transform.position = Vector3.MoveTowards(transform.position, v, 0.05f);
+                    whereDoesBlockGo = moveDirection.blockGoingUp;
+                }
 			} else {
-				Vector3 v = transform.position;
-				v.y = 0.5f;
-				transform.position = Vector3.MoveTowards (transform.position, v, 0.05f);
-			}*/
+                if (lowering)
+                {
+                    Vector3 v = transform.position;
+                    v.y = 0.5f;
+                    transform.position = Vector3.MoveTowards(transform.position, v, 0.05f);
+                    whereDoesBlockGo = moveDirection.blockGoingDown;
+                }
+			}
+            
+            if (whereDoesBlockGo == moveDirection.blockGoingUp && transform.position.y == 1.1f)
+            {
+                gameObject.layer = _obstacleLayerNumber;
+                AstarPath.active.UpdateGraphs(_guo);
+                gameObject.tag = "RaisedBlock";
+                whereDoesBlockGo = moveDirection.noMovement;
+                rising = false;
+            }
+            else if (whereDoesBlockGo == moveDirection.blockGoingDown && transform.position.y == 0.5f)
+            {
+                
+                gameObject.layer = _groundLayerNumber;
+                //AstarPath.active.UpdateGraphs(_guo);
+                AstarPath.active.Scan();
+                gameObject.tag = "Ground";
+                whereDoesBlockGo = moveDirection.noMovement;
+                lowering = false;
+            } 
+            
         }
 
         //	void OnMouseOver() {
@@ -98,17 +138,20 @@ namespace WizardCube
 						// Highlight the lowered block
 	                    _rend.material.color = _hightlightColor;
 						_rend2.material.color = _hightlightColor;
-
-                        /*
+                    
+                       
 						if (Input.GetMouseButtonDown(0))
 						{
 							blockRaised = true;
 							_blockLimiter.setRaised(1);
-							gameObject.layer = _obstacleLayerNumber;
-							AstarPath.active.UpdateGraphs(_guo);
-							gameObject.tag = "RaisedBlock";
-						}*/
+                            rising = true;
+							//gameObject.layer = _obstacleLayerNumber;
+							//AstarPath.active.UpdateGraphs(_guo);
+							//gameObject.tag = "RaisedBlock";
+						}
+                        
 	                    
+                        /*
 						if (Input.GetMouseButtonDown(0))
 						{
 							//Raise the block
@@ -121,7 +164,7 @@ namespace WizardCube
 							AstarPath.active.UpdateGraphs(_guo);
 							gameObject.tag = "RaisedBlock";
 						}
-						
+						*/
 
 	                }
 	            }
@@ -134,18 +177,21 @@ namespace WizardCube
 						_rend2.material.color = _hightlightColor;
 					}
 
-                    /*
+                    
 					// Lower the block
 					if (Input.GetMouseButtonDown(0) && !turretPlaced)
 	                {
 	                    blockRaised = false;
 	                    _blockLimiter.setRaised(-1);
-                        gameObject.layer = _groundLayerNumber;
+                        lowering = true;
+                        //gameObject.layer = _groundLayerNumber;
 	                    //AstarPath.active.UpdateGraphs(_guo);
-                        AstarPath.active.Scan();
-                        gameObject.tag = "Ground";
-	                }*/
+                        //AstarPath.active.Scan();
+                        //gameObject.tag = "Ground";
+	                }
+                    
 					
+                    /*
 					if (Input.GetMouseButtonDown(0) && !turretPlaced)
 					{
 						Vector3 v = transform.position;
@@ -158,6 +204,7 @@ namespace WizardCube
 						AstarPath.active.Scan();
 						gameObject.tag = "Ground";
 					}
+                    */
 					
 
 					// Create turret at the clicked block's location
