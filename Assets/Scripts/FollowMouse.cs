@@ -3,6 +3,8 @@ using System.Collections;
 
 public class FollowMouse : MonoBehaviour {
 
+    public float speed = 0.1f;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -11,9 +13,8 @@ public class FollowMouse : MonoBehaviour {
     void Update()
     {
         Vector3 temp = Input.mousePosition;
-        temp.z = 12.5f; // Set this to be the distance you want the object to be placed in front of the camera.
-        //temp.y = 1.6f;
+        temp.z = 12.5f; 
         this.transform.position = Camera.main.ScreenToWorldPoint(temp);
-        transform.position = new Vector3(transform.position.x, 2f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 5f, transform.position.z * 2 - 4.75f);
     }
 }
