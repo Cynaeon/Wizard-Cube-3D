@@ -11,7 +11,7 @@ namespace WizardCube
             Scene currentScene = SceneManager.GetActiveScene();
             int currentBuildIndex = currentScene.buildIndex;
 
-            if (currentScene.buildIndex >= 18)
+            if (currentScene.buildIndex >= 19)
             {
                 MoveToLevelSelect();
             }
