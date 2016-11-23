@@ -17,15 +17,15 @@ namespace WizardCube
         private Material lineMaterial;
 
         GraphNode firstNode;
+        Vector3 v3;
         GraphNode lastNode;
+        Vector3 lastV3;
 
         void Awake()
         {
             _seeker = GetComponent<Seeker>();
 
             _seeker.pathCallback += OnPathComplete;
-
-            CreateLineMaterial();
         }
 
 	    // Use this for initialization
@@ -95,40 +95,15 @@ namespace WizardCube
 
         public void OnPathComplete(Path _p)
         {
-            
-        }
-
-        void OnPostRender()
-        {
-            GL.PushMatrix();
-            lineMaterial.SetPass(0);
-
-            GL.Begin(GL.LINES);
-
+            firstNode = _p.path[0];
+            v3 = (Vector3)firstNode.position;
+            lastNode = _p.path[_p.path.Count - 1];
+            lastV3 = (Vector3)lastNode.position;
         }
 
         public void OnDisable()
         {
             _seeker.pathCallback -= OnPathComplete;
-        }
-
-        public void CreateLineMaterial()
-        {
-            if (!lineMaterial)
-            {
-                // Unity has a built-in shader that is useful for drawing
-                // simple colored things.
-                Shader shader = Shader.Find("Hidden/Internal-Colored");
-                lineMaterial = new Material(shader);
-                lineMaterial.hideFlags = HideFlags.HideAndDontSave;
-                // Turn on alpha blending
-                lineMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-                lineMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-                // Turn backface culling off
-                lineMaterial.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
-                // Turn off depth writes
-                lineMaterial.SetInt("_ZWrite", 0);
-            }
         }
     }
 }
