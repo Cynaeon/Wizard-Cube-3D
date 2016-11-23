@@ -51,7 +51,7 @@ namespace WizardCube
         // Update is called once per frame
         void Update()
         {
-			if (blockRaised) {
+			/*if (blockRaised) {
 				Vector3 v = transform.position;
 				v.y = 1.1f;
 				transform.position = Vector3.MoveTowards (transform.position, v, 0.05f);
@@ -59,7 +59,7 @@ namespace WizardCube
 				Vector3 v = transform.position;
 				v.y = 0.5f;
 				transform.position = Vector3.MoveTowards (transform.position, v, 0.05f);
-			}
+			}*/
         }
 
         //	void OnMouseOver() {
@@ -99,6 +99,7 @@ namespace WizardCube
 	                    _rend.material.color = _hightlightColor;
 						_rend2.material.color = _hightlightColor;
 
+                        /*
 						if (Input.GetMouseButtonDown(0))
 						{
 							blockRaised = true;
@@ -106,8 +107,8 @@ namespace WizardCube
 							gameObject.layer = _obstacleLayerNumber;
 							AstarPath.active.UpdateGraphs(_guo);
 							gameObject.tag = "RaisedBlock";
-						}
-	                    /*
+						}*/
+	                    
 						if (Input.GetMouseButtonDown(0))
 						{
 							//Raise the block
@@ -120,7 +121,7 @@ namespace WizardCube
 							AstarPath.active.UpdateGraphs(_guo);
 							gameObject.tag = "RaisedBlock";
 						}
-						*/
+						
 
 	                }
 	            }
@@ -133,6 +134,7 @@ namespace WizardCube
 						_rend2.material.color = _hightlightColor;
 					}
 
+                    /*
 					// Lower the block
 					if (Input.GetMouseButtonDown(0) && !turretPlaced)
 	                {
@@ -142,8 +144,8 @@ namespace WizardCube
 	                    //AstarPath.active.UpdateGraphs(_guo);
                         AstarPath.active.Scan();
                         gameObject.tag = "Ground";
-	                }
-					/*
+	                }*/
+					
 					if (Input.GetMouseButtonDown(0) && !turretPlaced)
 					{
 						Vector3 v = transform.position;
@@ -156,7 +158,7 @@ namespace WizardCube
 						AstarPath.active.Scan();
 						gameObject.tag = "Ground";
 					}
-					*/
+					
 
 					// Create turret at the clicked block's location
 					if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
