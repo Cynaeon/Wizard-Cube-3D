@@ -9,6 +9,9 @@ namespace WizardCube
 
         public void NewGameButton(string level)
         {
+			if (Time.timeScale != 1) {
+				Time.timeScale = 1;
+			}
             GameManager.Instance.LevelEndSettings();
 
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
