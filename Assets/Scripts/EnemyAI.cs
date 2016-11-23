@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using Pathfinding;
 
 namespace WizardCube
 {
@@ -15,6 +17,8 @@ namespace WizardCube
         void Awake()
         {
             _seeker = GetComponent<Seeker>();
+
+            _seeker.pathCallback += OnPathComplete;
         }
 
 	    // Use this for initialization
@@ -80,6 +84,16 @@ namespace WizardCube
         public void ForcePathSearch()
         {
             _aiLerp.ForceSearchPath();
+        }
+
+        public void OnPathComplete(Path _p)
+        {
+            Debug.LogWarning("Enemy got the new path!");
+        }
+
+        public void OnDisable()
+        {
+            _seeker.pathCallback -= OnPathComplete;
         }
     }
 }

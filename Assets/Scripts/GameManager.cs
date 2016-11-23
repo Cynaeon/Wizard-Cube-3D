@@ -127,7 +127,6 @@ namespace WizardCube
         public void LevelBeginSettings()
         {
             Scene currentScene = SceneManager.GetActiveScene();
-            //Debug.LogWarning(currentScene.buildIndex);
 
             if (currentScene.buildIndex >= 3)
             {
