@@ -35,7 +35,7 @@ namespace WizardCube
                         // Create a bullet
                         if (_enemyList.Count > 0)
                         {
-                            Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z);
+                            Vector3 pos = new Vector3(transform.position.x, transform.position.y + 1.25f, transform.position.z);
                             Quaternion rot = new Quaternion(0, 0, 0, 0);
                             Instantiate(bullet, pos, rot);
                             timeStamp = Time.time + fireRate;

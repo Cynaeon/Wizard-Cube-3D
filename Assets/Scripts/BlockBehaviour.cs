@@ -40,6 +40,9 @@ namespace WizardCube
 		bool rising = false;
 		bool lowering = false;
 
+        public Texture2D raisedTexture;
+        public Texture2D loweredTexture;
+
         void Awake()
         {
             _blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
@@ -70,6 +73,8 @@ namespace WizardCube
                     v.y = 1.1f;
                     transform.position = Vector3.MoveTowards(transform.position, v, 0.05f);
                     whereDoesBlockGo = moveDirection.blockGoingUp;
+                    _rend.material.mainTexture = raisedTexture;
+                    _rend2.material.mainTexture = raisedTexture;
                 }
 			} else {
                 if (lowering)
@@ -78,6 +83,8 @@ namespace WizardCube
                     v.y = 0.5f;
                     transform.position = Vector3.MoveTowards(transform.position, v, 0.05f);
                     whereDoesBlockGo = moveDirection.blockGoingDown;
+                    _rend.material.mainTexture = loweredTexture;
+                    _rend2.material.mainTexture = loweredTexture;
                 }
 			}
             
