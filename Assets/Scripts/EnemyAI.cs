@@ -10,24 +10,8 @@ namespace WizardCube
         [SerializeField]
         private AILerp _aiLerp;
 
-        private Seeker _seeker;
-
         public int health = 5;
-
-        private Material lineMaterial;
-
-        GraphNode firstNode;
-        Vector3 v3;
-        GraphNode lastNode;
-        Vector3 lastV3;
-
-        void Awake()
-        {
-            _seeker = GetComponent<Seeker>();
-
-            _seeker.pathCallback += OnPathComplete;
-        }
-
+        
 	    // Use this for initialization
 	    void Start ()
         {
@@ -91,19 +75,6 @@ namespace WizardCube
         public void ForcePathSearch()
         {
             _aiLerp.ForceSearchPath();
-        }
-
-        public void OnPathComplete(Path _p)
-        {
-            firstNode = _p.path[0];
-            v3 = (Vector3)firstNode.position;
-            lastNode = _p.path[_p.path.Count - 1];
-            lastV3 = (Vector3)lastNode.position;
-        }
-
-        public void OnDisable()
-        {
-            _seeker.pathCallback -= OnPathComplete;
         }
     }
 }
