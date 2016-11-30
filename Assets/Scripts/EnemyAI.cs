@@ -11,7 +11,16 @@ namespace WizardCube
         private AILerp _aiLerp;
 
         public int health = 5;
+
+        private Vector3 rayOrigin;
+
+        private bool hasDetectedAndStopped;
         
+        private void Awake()
+        {
+            rayOrigin = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+        }
+
 	    // Use this for initialization
 	    void Start ()
         {
@@ -22,6 +31,17 @@ namespace WizardCube
             }
 	    }
 	
+        void FixedUpdate()
+        {
+            if (hasDetectedAndStopped)
+            {
+                hasDetectedAndStopped = false;
+                _aiLerp.canMove = true;
+            }
+
+            AvoidOtherEnemies();
+        }
+
 	    // Update is called once per frame
 	    void Update ()
         {
@@ -75,6 +95,35 @@ namespace WizardCube
         public void ForcePathSearch()
         {
             _aiLerp.ForceSearchPath();
+        }
+
+        public void AvoidOtherEnemies()
+        {
+            RaycastHit hit;
+
+            UpdateRayPosition();
+            Debug.DrawRay(rayOrigin, transform.forward);
+
+            if (Physics.Raycast(rayOrigin, transform.forward, out hit, 1f))
+            {
+                if (hit.collider.gameObject.tag == "Enemy")
+                {
+                    Debug.LogWarning(hit.collider.gameObject.name + " detected right in front!");
+                    
+                    if (_aiLerp.canMove)
+                    {
+                        _aiLerp.canMove = false;
+                        hasDetectedAndStopped = true;
+                    }
+                }
+            }
+        }
+
+        private void UpdateRayPosition()
+        {
+            rayOrigin.x = transform.position.x; 
+            rayOrigin.y = transform.position.y + 0.5f;
+            rayOrigin.z = transform.position.z;
         }
     }
 }
