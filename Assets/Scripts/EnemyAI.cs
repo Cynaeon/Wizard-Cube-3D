@@ -31,7 +31,7 @@ namespace WizardCube
             }
 	    }
 	
-        /*void FixedUpdate()
+        void FixedUpdate()
         {
             if (hasDetectedAndStopped)
             {
@@ -40,7 +40,7 @@ namespace WizardCube
             }
 
             AvoidOtherEnemies();
-        }*/
+        }
 
 	    // Update is called once per frame
 	    void Update ()
@@ -102,9 +102,9 @@ namespace WizardCube
             RaycastHit hit;
 
             UpdateRayPosition();
-            Debug.DrawRay(rayOrigin, transform.forward);
+            Debug.DrawRay(rayOrigin, transform.forward * 0.5f);
 
-            if (Physics.Raycast(rayOrigin, transform.forward, out hit, 1f))
+            if (Physics.Raycast(rayOrigin, transform.forward, out hit, 0.5f))
             {
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
