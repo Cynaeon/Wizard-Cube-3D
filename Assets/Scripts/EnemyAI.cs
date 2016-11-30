@@ -31,7 +31,7 @@ namespace WizardCube
             }
 	    }
 	
-        void FixedUpdate()
+        /*void FixedUpdate()
         {
             if (hasDetectedAndStopped)
             {
@@ -40,7 +40,7 @@ namespace WizardCube
             }
 
             AvoidOtherEnemies();
-        }
+        }*/
 
 	    // Update is called once per frame
 	    void Update ()
