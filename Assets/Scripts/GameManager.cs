@@ -38,7 +38,7 @@ namespace WizardCube
         private GameObject _victoryWindow;
         private GameObject _treasure;
         private GameObject _beginButton;
-		private BlockLimiter _blockLimiter;
+		public BlockLimiter _blockLimiter { get; private set; }
 
         public int sceneBeforeGameOver { get; private set; }
 
