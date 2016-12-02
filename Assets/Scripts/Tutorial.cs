@@ -19,23 +19,33 @@ namespace WizardCube
 		// Update is called once per frame
 		void Update () {
 			
-			checkRaised ();
+			check ();
 		}
 
 		public void beginButtonPressed(){
 			text.enabled = false;
 		}
 
-		public void checkRaised()
+		public void check()
 		{
-			if (_limiter._raised == 0) {
-				text.text = "Press ground to raise blocks";
+			if(Application.loadedLevelName == "level01"){
+				if (_limiter._raised == 0) {
+					text.text = "Press ground to raise blocks";
+				}
+				if (_limiter._raised > 0 && _limiter._raised < _limiter.maxRaisedAmount) {
+					text.text = "Now make enemies pass over the green blocks";
+				}
+				if (_limiter._raised == _limiter.maxRaisedAmount) {
+					text.text = "Now press begin!";
+				}
 			}
-			if (_limiter._raised > 0 && _limiter._raised < _limiter.maxRaisedAmount) {
-				text.text = "Now make enemies pass over the green blocks";
-			}
-			if (_limiter._raised == _limiter.maxRaisedAmount) {
-				text.text = "Now press begin!";
+			if (Application.loadedLevelName == "level05") {
+				if (_limiter._turretsPlaced == 0) {
+					text.text = "You can place turrets by right clicking a raised cube";
+				}
+				if (_limiter._turretsPlaced > 0) {
+					text.text = "Turrets always target the nearest enemy";
+				}
 			}
 		}
 

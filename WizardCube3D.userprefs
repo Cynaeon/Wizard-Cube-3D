@@ -4,16 +4,16 @@
     <Files>
       <File FileName="Assets\Scripts\LookAtMouse.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BlockBehaviour.cs" Line="6" Column="2" />
+      <File FileName="Assets\Scripts\BlockBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\BlockLimiter.cs" Line="16" Column="45" />
       <File FileName="Assets\Scripts\StateBase.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="143" Column="1" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="264" Column="64" />
       <File FileName="Assets\Scripts\Pause.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GUI\ButtonManager.cs" Line="1" Column="1" />
       <File FileName="Assets\AstarPathfindingProject\Core\AstarPath.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\LevelManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Tutorial.cs" Line="32" Column="31" />
-      <File FileName="Assets\Scripts\LevelInitialize.cs" Line="10" Column="1" />
+      <File FileName="Assets\Scripts\Tutorial.cs" Line="39" Column="34" />
+      <File FileName="Assets\Scripts\LevelInitialize.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
