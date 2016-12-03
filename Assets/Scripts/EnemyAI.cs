@@ -14,6 +14,9 @@ namespace WizardCube
 
         private Vector3 rayOrigin;
 
+        [SerializeField]
+        private float _rayLength = 0.5f;
+
         private bool hasDetectedAndStopped;
 
         [SerializeField]
@@ -121,9 +124,9 @@ namespace WizardCube
             RaycastHit hit;
 
             UpdateRayPosition();
-            Debug.DrawRay(rayOrigin, transform.forward * 0.5f);
+            Debug.DrawRay(rayOrigin, transform.forward * _rayLength);
 
-            if (Physics.Raycast(rayOrigin, transform.forward, out hit, 0.5f))
+            if (Physics.Raycast(rayOrigin, transform.forward, out hit, _rayLength))
             {
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
