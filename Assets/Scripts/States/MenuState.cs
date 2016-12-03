@@ -7,9 +7,8 @@ namespace WizardCube
     {
         public MenuState() : base()
         {
-            State = StateType.Victory;
-            AddTransition(TransitionType.VictoryToPreparations, StateType.Preparations);
-            AddTransition(TransitionType.VictoryToMenu, StateType.Menu);
+            State = StateType.Menu;
+            AddTransition(TransitionType.MenuToPreparations, StateType.Preparations);
         }
 
         public override void StateActivated()

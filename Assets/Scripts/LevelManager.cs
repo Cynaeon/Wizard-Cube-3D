@@ -23,6 +23,13 @@ namespace WizardCube
             }
         }
 
+        public void MoveOutOfMenu(int buildIndexToGoTo)
+        {
+            GameManager.Instance.LevelEndSettings();
+            GameManager.Instance.StateManager.PerformTransition(TransitionType.MenuToPreparations);
+            SceneManager.LoadSceneAsync(buildIndexToGoTo, LoadSceneMode.Single);
+        }
+
         public void MoveToStageX(int buildIndexToGoTo)
         {
             GameManager.Instance.LevelEndSettings();
@@ -46,7 +53,24 @@ namespace WizardCube
         public void MoveToLevelSelect()
         {
             GameManager.Instance.LevelEndSettings();
-            GameManager.Instance.StateManager.PerformTransition(TransitionType.VictoryToPreparations);
+
+            if (GameManager.Instance.StateManager.CurrentStateType == StateType.Victory)
+            {
+                GameManager.Instance.StateManager.PerformTransition(TransitionType.VictoryToMenu);
+            }
+            else if (GameManager.Instance.StateManager.CurrentStateType == StateType.Active)
+            {
+                GameManager.Instance.StateManager.PerformTransition(TransitionType.ActiveToMenu);
+            }
+            else if (GameManager.Instance.StateManager.CurrentStateType == StateType.Preparations)
+            {
+                GameManager.Instance.StateManager.PerformTransition(TransitionType.PreparationsToMenu);
+            }
+            else if(GameManager.Instance.StateManager.CurrentStateType == StateType.GameOver)
+            {
+                GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToMenu);
+            }
+
             SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
         }
 

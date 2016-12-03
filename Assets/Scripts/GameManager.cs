@@ -98,11 +98,11 @@ namespace WizardCube
 
         private void InitializeStateManager ()
         {
-            StateManager = new StateManager(new PreparationState());
+            StateManager = new StateManager(new MenuState());
+            StateManager.AddState(new PreparationState());
             StateManager.AddState(new ActiveState());
             StateManager.AddState(new GameOverState());
             StateManager.AddState(new VictoryState());
-            StateManager.AddState(new MenuState());
         }
 
         private void HandleStateLoaded(StateType type)

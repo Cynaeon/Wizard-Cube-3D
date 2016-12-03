@@ -10,6 +10,7 @@ namespace WizardCube
             AddTransition(TransitionType.ActiveToVictory, StateType.Victory);
             AddTransition(TransitionType.ActiveToGameOver, StateType.GameOver);
             AddTransition(TransitionType.ActiveToPreparations, StateType.Preparations);
+            AddTransition(TransitionType.ActiveToMenu, StateType.Menu);
         }
 
         public override void StateActivated()

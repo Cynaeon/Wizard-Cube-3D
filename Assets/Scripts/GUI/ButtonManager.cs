@@ -34,6 +34,31 @@ namespace WizardCube
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         }
 
+        public void MoveToLevelFromMenu(int buildIndexToGoTo)
+        {
+            StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
+            Debug.LogWarning("Current state before transition: " + currentForComparison);
+
+            GameManager.Instance.LevelManager.MoveOutOfMenu(buildIndexToGoTo);
+
+            Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
+        }
+
+        public void ChangeLevel(int buildIndexToGoTo)
+        {
+            GameManager.Instance.LevelManager.MoveToStageX(buildIndexToGoTo);
+        }
+
+        public void ToMenuButton()
+        {
+            StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
+            Debug.LogWarning("Current state before transition: " + currentForComparison);
+
+            GameManager.Instance.LevelManager.MoveToLevelSelect();
+
+            Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
+        }
+
         public void RetryGameOverButton()
         {
             /*int lastSceneBuildIndex = GameManager.Instance.sceneBeforeGameOver;
@@ -52,7 +77,6 @@ namespace WizardCube
 
         public void NextLevelButton()
         {
-            //GameManager.Instance.MoveToNextStage();
             GameManager.Instance.LevelManager.MoveToNextStage();
         }
 

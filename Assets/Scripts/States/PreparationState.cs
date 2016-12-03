@@ -8,6 +8,7 @@ namespace WizardCube
         {
             State = StateType.Preparations;
             AddTransition(TransitionType.PreparationsToActive, StateType.Active);
+            AddTransition(TransitionType.PreparationsToMenu, StateType.Menu);
         }
 
         public override void StateActivated()
