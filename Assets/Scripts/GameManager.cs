@@ -231,31 +231,11 @@ namespace WizardCube
             {
                 foreach (Turret tur in _turretList)
                 {
-                    tur.ToggleSafety(true);
+						tur.ToggleSafety (true);
                 }
             }
         }
 
-        /*public void MoveToNextStage()
-        {
-            Scene currentScene = SceneManager.GetActiveScene();
-            int currentBuildIndex = currentScene.buildIndex;
-
-            if (currentScene.buildIndex == 11)
-            {
-                LevelEndSettings();
-                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-                SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-            }
-            else
-            {
-                currentBuildIndex++;
-
-                LevelEndSettings();
-                StateManager.PerformTransition(TransitionType.VictoryToPreparations);
-                SceneManager.LoadSceneAsync(currentBuildIndex, LoadSceneMode.Single);
-            }
-        }*/
 
         public void MoveToGameOver()
         {

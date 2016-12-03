@@ -48,21 +48,28 @@ namespace WizardCube
         public void TurretRises()
         {
             _isUp = true;
-            Debug.LogWarning(_isUp);
+			Debug.LogWarning("isUp: " + _isUp);
         }
+		public void TurretLowers()
+		{
+			_isUp = false;
+			Debug.LogWarning ("isUp: " + _isUp);
+		}
 
         public void ToggleSafety(bool shouldTurretFire)
         {
-            if (shouldTurretFire)
-            {
-                _canFire = true;
-                //Debug.LogWarning(_canFire);
-            }
+			if (_isUp) { 
+				if (shouldTurretFire) { 
+					_canFire = true; 
+				} 
+			}
             else
             {
-                _canFire = false;
+				if(!shouldTurretFire){
+                	_canFire = false;
                 //Debug.LogWarning(_canFire);
-            }
+				}
+			}
         }
 	}
 }

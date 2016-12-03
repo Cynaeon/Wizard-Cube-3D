@@ -21,6 +21,7 @@ namespace WizardCube
 		private Renderer _rend2;
         private Color _defaultColor;
         private Color _hightlightColor;
+		private Color _hightlightColor2;
         private BlockLimiter _blockLimiter;
         private GraphUpdateObject _guo;
         private Animator _animator;
@@ -60,6 +61,7 @@ namespace WizardCube
 			_rend2 = _changeThisToo.GetComponent<Renderer>();
             _defaultColor = _rend.material.color;
 			_hightlightColor = new Color(_defaultColor.r, _defaultColor.g + 2, _defaultColor.b, _defaultColor.a);
+			_hightlightColor2 = new Color(_defaultColor.r+0.5f, _defaultColor.g, _defaultColor.b, _defaultColor.a);
         }
 
         // Update is called once per frame
@@ -108,30 +110,7 @@ namespace WizardCube
             } 
             
         }
-
-        //	void OnMouseOver() {
-        //		if(GameObject.Find("BlockController").GetComponent<BlockLimiter>().Raisins){
-        //		rend.material.color = hightlightColor;
-        //
-        //			if (Input.GetMouseButtonDown (0)) {
-        //				if (!blockRaised) {
-        //					Vector3 v = transform.position;
-        //					v.y = 1f;
-        //					transform.position = v;
-        //					blockRaised = true;
-        //					GameObject.Find ("BlockController").GetComponent<BlockLimiter> ().setRaised (1);
-        //
-        //				} else {
-        //					Vector3 v = transform.position;
-        //					v.y = 0.5f;
-        //					transform.position = v;
-        //					blockRaised = false;
-        //					GameObject.Find ("BlockController").GetComponent<BlockLimiter> ().setRaised (-1);
-        //				}
-        //			}
-        //		}
-        //	}
-
+			
         void OnMouseOver()
         {
 			GameObject Canvas = GameObject.Find ("Canvas");
@@ -152,27 +131,7 @@ namespace WizardCube
 							blockRaised = true;
 							_blockLimiter.setRaised(1);
                             rising = true;
-							//gameObject.layer = _obstacleLayerNumber;
-							//AstarPath.active.UpdateGraphs(_guo);
-							//gameObject.tag = "RaisedBlock";
 						}
-                        
-	                    
-                        /*
-						if (Input.GetMouseButtonDown(0))
-						{
-							//Raise the block
-							Vector3 v = transform.position;
-							v.y = 1.1f;
-							transform.position = v;
-							blockRaised = true;
-							_blockLimiter.setRaised(1);
-							gameObject.layer = _obstacleLayerNumber;
-							AstarPath.active.UpdateGraphs(_guo);
-							gameObject.tag = "RaisedBlock";
-						}
-						*/
-
 	                }
 	            }
 				else if (blockRaised && !_blockLimiter.beginPressed)
@@ -182,6 +141,11 @@ namespace WizardCube
 					if (!turretPlaced) {
 						_rend.material.color = _hightlightColor;
 						_rend2.material.color = _hightlightColor;
+
+					}else if(turretPlaced){
+						//Debugging
+						_rend.material.color = _hightlightColor2;
+						_rend2.material.color = _hightlightColor2;
 					}
 
                     
@@ -191,35 +155,18 @@ namespace WizardCube
 	                    blockRaised = false;
 	                    _blockLimiter.setRaised(-1);
                         lowering = true;
-                        //gameObject.layer = _groundLayerNumber;
-	                    //AstarPath.active.UpdateGraphs(_guo);
-                        //AstarPath.active.Scan();
-                        //gameObject.tag = "Ground";
 	                }
-                    
-					
-                    /*
-					if (Input.GetMouseButtonDown(0) && !turretPlaced)
-					{
-						Vector3 v = transform.position;
-						v.y = 0.5f;
-						transform.position = v;
-						blockRaised = false;
-						_blockLimiter.setRaised(-1);
-						gameObject.layer = _groundLayerNumber;
-						//AstarPath.active.UpdateGraphs(_guo);
-						AstarPath.active.Scan();
-						gameObject.tag = "Ground";
-					}
-                    */
-					
 
-					// Create turret at the clicked block's location
-					if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
+					if (Input.GetMouseButtonDown(1) && turretPlaced)
 					{
-                        /*Vector3 pos = new Vector3 (transform.position.x, transform.position.y + 0.75f, transform.position.z);
-						Quaternion rot = new Quaternion (0, 0, 0, 0);
-						Instantiate (turret, pos, rot);*/
+						turretPlaced = false;
+						_blockLimiter.setTurret (-1);
+						_turret.TurretLowers ();
+						_animator.SetTrigger("TurretOff");
+
+					}else if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
+					{
+						
                         _animator.SetTrigger("TurretOn");
                         turretPlaced = true;
 						_blockLimiter.setTurret (1);
