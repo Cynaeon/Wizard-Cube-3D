@@ -6,9 +6,11 @@ public class AudioManager : MonoBehaviour {
 
     public AudioMixerSnapshot action;
     public AudioMixerSnapshot prep;
+	public AudioMixerSnapshot menu;
 
-    private float m_TransitionIn = 1;
-    private float m_TransitionOut = 2;
+    private float m_TransitionAction = 1;
+    private float m_TransitionPrep = 2;
+	private float m_TransitionMenu = 2;
 
 	// Use this for initialization
 	void Start () {
@@ -23,11 +25,17 @@ public class AudioManager : MonoBehaviour {
 
     public void TransitionToAction()
     {
-        action.TransitionTo(m_TransitionIn);
+        action.TransitionTo(m_TransitionAction);
     }
 
     public void TransitionToPrep()
     {
-        prep.TransitionTo(m_TransitionOut);
+        prep.TransitionTo(m_TransitionPrep);
     }
+
+	public void TransitionToMenu()
+	{
+		menu.TransitionTo (m_TransitionMenu);
+	}
+
 }
