@@ -64,6 +64,7 @@ namespace WizardCube
                 _animator.SetTrigger("Die");
                 /*GameManager.Instance.ManageEnemyList(this);
                 Destroy(this.gameObject);*/
+                MovementControl(true);
                 _prepareToDie = true;
             }
         }
