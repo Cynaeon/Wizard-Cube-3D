@@ -15,7 +15,12 @@ namespace WizardCube
         private Vector3 rayOrigin;
 
         private bool hasDetectedAndStopped;
-        
+
+        [SerializeField]
+        private Animator _animator;
+
+        private bool _prepareToDie;
+
         private void Awake()
         {
             rayOrigin = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
@@ -45,10 +50,21 @@ namespace WizardCube
 	    // Update is called once per frame
 	    void Update ()
         {
-            if (health < 1)
+            if (_prepareToDie)
             {
-                GameManager.Instance.ManageEnemyList(this);
-                Destroy(this.gameObject);
+                if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !_animator.IsInTransition(0))
+                {
+                    GameManager.Instance.ManageEnemyList(this);
+                    Destroy(this.gameObject);
+                }
+            }
+
+            if (health < 1 && !_prepareToDie)
+            {
+                _animator.SetTrigger("Die");
+                /*GameManager.Instance.ManageEnemyList(this);
+                Destroy(this.gameObject);*/
+                _prepareToDie = true;
             }
         }
 
@@ -71,6 +87,8 @@ namespace WizardCube
             else if (!haltMovement)
             {
                 _aiLerp.canMove = true;
+                _animator.SetTrigger("Walk");
+                
             }
         }
 
