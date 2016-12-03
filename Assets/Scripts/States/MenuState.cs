@@ -13,6 +13,11 @@ namespace WizardCube
 
         public override void StateActivated()
         {
+            if (Time.timeScale != 1)
+            {
+                Time.timeScale = 1;
+            }
+
 			GameManager.Instance.AudioManager.TransitionToMenu();
         }
     }
