@@ -55,6 +55,11 @@ namespace WizardCube
                 _instance = this;
                 Initialize();
             }
+
+            if (_instance != this)
+            {
+                Destroy(this.gameObject);
+            }
         }
 
         private void FixedUpdate()
