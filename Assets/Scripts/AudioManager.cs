@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour {
+
+	public Slider musicSlider;
 
     public AudioMixerSnapshot action;
     public AudioMixerSnapshot prep;
@@ -14,13 +17,14 @@ public class AudioManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
         //action.TransitionTo(m_TransitionIn);
         //prep.TransitionTo(m_TransitionOut);
+
 	}
 
     public void TransitionToAction()
@@ -36,6 +40,10 @@ public class AudioManager : MonoBehaviour {
 	public void TransitionToMenu()
 	{
 		menu.TransitionTo (m_TransitionMenu);
+	}
+
+	public void volumeControl(float volumeControl){
+		
 	}
 
 }
