@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour {
 
-	public Slider musicSlider;
-
     public AudioMixerSnapshot action;
     public AudioMixerSnapshot prep;
 	public AudioMixerSnapshot menu;
@@ -40,6 +38,7 @@ public class AudioManager : MonoBehaviour {
 	public void TransitionToMenu()
 	{
 		menu.TransitionTo (m_TransitionMenu);
+
 	}
 
 	public void volumeControl(float volumeControl){

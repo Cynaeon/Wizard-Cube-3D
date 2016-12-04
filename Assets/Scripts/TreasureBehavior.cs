@@ -9,7 +9,7 @@ namespace WizardCube
 
         private void Awake()
         {
-
+			
         }
 
         // Use this for initialization
