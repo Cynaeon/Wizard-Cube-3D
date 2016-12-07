@@ -38,6 +38,9 @@ namespace WizardCube
         private GameObject _victoryWindow;
         private GameObject _treasure;
         private GameObject _beginButton;
+
+        public bool fastForward;
+
 		public BlockLimiter _blockLimiter { get; private set; }
 
         public int sceneBeforeGameOver { get; private set; }
@@ -65,10 +68,12 @@ namespace WizardCube
         private void FixedUpdate()
         {
             // Fast forwarding
-            if (Input.GetButton("Fire1"))
+            //if (Input.GetButton("Fire1"))
+            if (fastForward)
             {
                 Time.timeScale = 4.0f;
-            } else
+            }
+            else if (!fastForward)
             {
                 Time.timeScale = 1.0f;
             }

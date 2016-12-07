@@ -49,6 +49,16 @@ namespace WizardCube
             GameManager.Instance.LevelManager.MoveToStageX(buildIndexToGoTo);
         }
 
+        public void FastForwardActive()
+        {
+            GameManager.Instance.fastForward = true;
+        }
+
+        public void FastForwardNotActive()
+        {
+            GameManager.Instance.fastForward = false;
+        }
+
         public void ToMenuButton()
         {
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
