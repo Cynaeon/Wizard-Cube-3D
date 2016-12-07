@@ -38,6 +38,7 @@ namespace WizardCube
         private GameObject _victoryWindow;
         private GameObject _treasure;
         private GameObject _beginButton;
+        private GameObject _fastForwardButton;
 
         public bool fastForward;
 
@@ -141,6 +142,8 @@ namespace WizardCube
             Scene currentScene = SceneManager.GetActiveScene();
             //Debug.LogWarning(currentScene.buildIndex);
 
+            fastForward = false;
+
             if (currentScene.buildIndex >= 3)
             {
                 _turretArray = FindObjectsOfType(typeof(Turret)) as Turret[];
@@ -161,7 +164,12 @@ namespace WizardCube
                     ToggleBeginButton(true);
                 }
 
-                Debug.LogWarning(_treasure.transform.position.x + " " + _treasure.transform.position.y + " " + _treasure.transform.position.z);
+                _fastForwardButton = GameObject.Find("FFButton");
+
+                if (_fastForwardButton.activeInHierarchy)
+                {
+                    ToggleFastForwardButton(false);
+                }
             }
         }
 
@@ -263,6 +271,11 @@ namespace WizardCube
 			_blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
 			_blockLimiter.ChangeBeginState (isVisible);
 
+        }
+
+        public void ToggleFastForwardButton(bool isVisible)
+        {
+            _fastForwardButton.SetActive(isVisible);
         }
 
         public List<EnemyAI> GiveEnemyList()

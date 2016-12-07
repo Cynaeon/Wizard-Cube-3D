@@ -20,6 +20,7 @@ namespace WizardCube
             GameManager.Instance.ControlEnemySearch(false);
             GameManager.Instance.FireTheTurrets();
             GameManager.Instance.AudioManager.TransitionToAction();
+            GameManager.Instance.ToggleFastForwardButton(true);
         }
     }
 }
