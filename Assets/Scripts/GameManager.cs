@@ -49,7 +49,6 @@ namespace WizardCube
         public StateManager StateManager { get; private set; }
         public LevelManager LevelManager { get; private set; }
         public AudioManager AudioManager { get; private set; }
-        //...and so on.
 
         private void Awake()
         {
@@ -297,6 +296,41 @@ namespace WizardCube
             {
                 enemy.ChangeTarget(_treasure.transform);
             }
+        }
+
+        public void ResetSave()
+        {
+            PlayerPrefs.SetInt("Latest Unlock", 0);
+        }
+
+        public void UnlockNextLevel()
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            int buildIndexOfLevelToUnlock = currentScene.buildIndex - 1;
+
+            PlayerPrefs.SetInt("Latest Unlock", buildIndexOfLevelToUnlock);
+        }
+
+        public void CheckUnlockStatus(int latestLevelUnlocked)
+        {
+
+        }
+
+        public void SaveGame()
+        {
+            PlayerPrefs.Save();
+        }
+
+        public void LoadGame()
+        {
+            int lastUnlockedLevel = PlayerPrefs.GetInt("Latest Unlock");
+
+            if (lastUnlockedLevel > 0)
+            {
+                CheckUnlockStatus(lastUnlockedLevel);
+            }
+
+            //Sound stuff can go here as well
         }
     }
 }
