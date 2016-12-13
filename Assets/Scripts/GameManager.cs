@@ -42,6 +42,8 @@ namespace WizardCube
 
         public bool fastForward;
 
+        public int latestUnlockedLevel;
+
 		public BlockLimiter _blockLimiter { get; private set; }
 
         public int sceneBeforeGameOver { get; private set; }
@@ -79,6 +81,18 @@ namespace WizardCube
             }
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                DebugUnlockAll();
+            }
+            else if (Input.GetKeyDown(KeyCode.Y))
+            {
+                ResetSave();
+            }
+        }
+
         protected void OnLevelWasLoaded(int levelIndex)
         {
             if (SceneLoaded != null)
@@ -99,6 +113,7 @@ namespace WizardCube
             //_victoryWindow.SetActive(false);
             LevelBeginSettings();
             CheckAll();
+            LoadGame();
         }
 
         private void InitializeStateManager ()
@@ -300,7 +315,9 @@ namespace WizardCube
 
         public void ResetSave()
         {
-            PlayerPrefs.SetInt("Latest Unlock", 0);
+            PlayerPrefs.SetInt("Latest Unlock", 1);
+            latestUnlockedLevel = 1;
+            SaveGame();
         }
 
         public void UnlockNextLevel()
@@ -309,11 +326,17 @@ namespace WizardCube
             int buildIndexOfLevelToUnlock = currentScene.buildIndex - 1;
 
             PlayerPrefs.SetInt("Latest Unlock", buildIndexOfLevelToUnlock);
+            latestUnlockedLevel = buildIndexOfLevelToUnlock;
+            SaveGame();
         }
 
-        public void CheckUnlockStatus(int latestLevelUnlocked)
+        public void DebugUnlockAll()
         {
+            int buildIndexOfLevelToUnlock = 13;
 
+            PlayerPrefs.SetInt("Latest Unlock", buildIndexOfLevelToUnlock);
+            latestUnlockedLevel = buildIndexOfLevelToUnlock;
+            SaveGame();
         }
 
         public void SaveGame()
@@ -323,12 +346,8 @@ namespace WizardCube
 
         public void LoadGame()
         {
-            int lastUnlockedLevel = PlayerPrefs.GetInt("Latest Unlock");
-
-            if (lastUnlockedLevel > 0)
-            {
-                CheckUnlockStatus(lastUnlockedLevel);
-            }
+            int lastUnlockedLevel = PlayerPrefs.GetInt("Latest Unlock", 1);
+            latestUnlockedLevel = lastUnlockedLevel;
 
             //Sound stuff can go here as well
         }
