@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour {
     public AudioMixerSnapshot action;
     public AudioMixerSnapshot prep;
 	public AudioMixerSnapshot menu;
+
+    public List<AudioSource> listOfSoundEffects;
 
     private float m_TransitionAction = 1;
     private float m_TransitionPrep = 2;
@@ -45,4 +47,34 @@ public class AudioManager : MonoBehaviour {
 		
 	}
 
+    public void toggleMusicMute()
+    {
+        
+    }
+
+    public void playSoundEffect(int numberOfSfxToPlay)
+    {
+        listOfSoundEffects[numberOfSfxToPlay].Play();
+    }
+
+    public void playRandomHitSound()
+    {
+        int randomNumber = Random.Range(6,7);
+
+        listOfSoundEffects[randomNumber].Play();
+    }
+
+    public void playRandomEnemySound()
+    {
+        int randomNumber = Random.Range(8, 10);
+
+        listOfSoundEffects[randomNumber].Play();
+    }
+
+    public void playRandomShootSound()
+    {
+        int randomNumber = Random.Range(15, 17);
+
+        listOfSoundEffects[randomNumber].Play();
+    }
 }

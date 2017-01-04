@@ -131,6 +131,7 @@ namespace WizardCube
 							blockRaised = true;
 							_blockLimiter.setRaised(1);
                             rising = true;
+                            GameManager.Instance.AudioManager.playSoundEffect(3);
 						}
 	                }
 	            }
@@ -155,7 +156,8 @@ namespace WizardCube
 	                    blockRaised = false;
 	                    _blockLimiter.setRaised(-1);
                         lowering = true;
-	                }
+                        GameManager.Instance.AudioManager.playSoundEffect(0);
+                    }
 
 					if (Input.GetMouseButtonDown(1) && turretPlaced)
 					{
@@ -163,19 +165,22 @@ namespace WizardCube
 						_blockLimiter.setTurret (-1);
 						_turret.TurretLowers ();
 						_animator.SetTrigger("TurretOff");
+                        GameManager.Instance.AudioManager.playSoundEffect(14);
 
-					}else if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
+                    }
+                    else if (Input.GetMouseButtonDown (1) && !turretPlaced && _blockLimiter._turretsPlaced < _blockLimiter.turretsMax) 
 					{
 						
                         _animator.SetTrigger("TurretOn");
                         turretPlaced = true;
 						_blockLimiter.setTurret (1);
-                        Debug.LogWarning("The name of the gameobject is: " + _turret.gameObject.name + " and its parent is named: " + _turret.gameObject.transform.parent.name);
+                        //Debug.LogWarning("The name of the gameobject is: " + _turret.gameObject.name + " and its parent is named: " + _turret.gameObject.transform.parent.name);
                         _turret.TurretRises();
+                        GameManager.Instance.AudioManager.playSoundEffect(18);
 
-                        
-                        
-                        
+
+
+
                     }
 	            }
 			}

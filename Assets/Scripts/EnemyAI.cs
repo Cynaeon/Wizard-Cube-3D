@@ -57,6 +57,7 @@ namespace WizardCube
             {
                 if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !_animator.IsInTransition(0))
                 {
+                    GameManager.Instance.AudioManager.playSoundEffect(5);
                     GameManager.Instance.ManageEnemyList(this);
                     Destroy(this.gameObject);
                 }
@@ -78,6 +79,7 @@ namespace WizardCube
             {
                 health -= 1;
                 Destroy(other.gameObject);
+                GameManager.Instance.AudioManager.playRandomHitSound();
             }
         }
 

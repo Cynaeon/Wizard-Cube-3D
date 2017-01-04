@@ -63,6 +63,7 @@ namespace WizardCube
 
         void FallDown()
         {
+            GameManager.Instance.AudioManager.playSoundEffect(1);
             _rigidBody.isKinematic = false;
             _rigidBody.useGravity = true;
         }

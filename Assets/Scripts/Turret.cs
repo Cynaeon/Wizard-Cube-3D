@@ -30,11 +30,13 @@ namespace WizardCube
                         //GameObject[] gos;
                         //gos = GameObject.FindGameObjectsWithTag("Enemy");
                         List<EnemyAI> _enemyList = GameManager.Instance.GiveEnemyList();
-                        Debug.LogWarning(_enemyList.Count);
+                        //Debug.LogWarning(_enemyList.Count);
 
                         // Create a bullet
                         if (_enemyList.Count > 0)
                         {
+                            GameManager.Instance.AudioManager.playRandomShootSound();
+
                             Vector3 pos = new Vector3(transform.position.x, transform.position.y + 1.25f, transform.position.z);
                             Quaternion rot = new Quaternion(0, 0, 0, 0);
                             Instantiate(bullet, pos, rot);

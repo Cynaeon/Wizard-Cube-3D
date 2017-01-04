@@ -12,10 +12,12 @@ namespace WizardCube
 			if (Time.timeScale != 1) {
 				Time.timeScale = 1;
 			}
+            GameManager.Instance.AudioManager.playSoundEffect(4);
+
             GameManager.Instance.LevelEndSettings();
 
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
-            Debug.LogWarning("Current state before transition: " + currentForComparison);
+            //Debug.LogWarning("Current state before transition: " + currentForComparison);
 
             if (currentForComparison == StateType.Active)
             {
@@ -30,18 +32,19 @@ namespace WizardCube
                 GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToPreparations);
             }
 
-            Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
+            //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         }
 
         public void MoveToLevelFromMenu(int buildIndexToGoTo)
         {
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
-            Debug.LogWarning("Current state before transition: " + currentForComparison);
+            //Debug.LogWarning("Current state before transition: " + currentForComparison);
 
+            GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveOutOfMenu(buildIndexToGoTo);
 
-            Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
+            //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
         }
 
         public void ChangeLevel(int buildIndexToGoTo)
@@ -62,11 +65,12 @@ namespace WizardCube
         public void ToMenuButton()
         {
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
-            Debug.LogWarning("Current state before transition: " + currentForComparison);
+            //Debug.LogWarning("Current state before transition: " + currentForComparison);
 
+            GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveToLevelSelect();
 
-            Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
+            //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
         }
 
         public void RetryGameOverButton()
@@ -77,16 +81,19 @@ namespace WizardCube
             GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToPreparations);
             SceneManager.LoadSceneAsync(lastSceneBuildIndex, LoadSceneMode.Single);*/
 
+            GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.GameOverRetry();
         }
 
         public void ExitGameButton()
         {
+            GameManager.Instance.AudioManager.playSoundEffect(4);
             Application.Quit();
         }
 
         public void NextLevelButton()
         {
+            GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveToNextStage();
         }
 

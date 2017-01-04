@@ -255,6 +255,7 @@ namespace WizardCube
         public void ToggleVictoryWindow()
         {
             _victoryWindow.SetActive(true);
+            AudioManager.playSoundEffect(19);
         }
 
         public void FireTheTurrets()
