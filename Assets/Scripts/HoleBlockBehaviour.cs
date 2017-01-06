@@ -10,6 +10,7 @@ namespace WizardCube
         private bool _timeUntilFall;
         private Vector3 positionAtStart;
         private GameObject enemyInHole;
+        private bool _soundHasPlayed;
 
         private void Awake()
         {
@@ -63,7 +64,12 @@ namespace WizardCube
 
         void FallDown()
         {
-            GameManager.Instance.AudioManager.playSoundEffect(1);
+            if (!_soundHasPlayed)
+            {
+                GameManager.Instance.AudioManager.playSoundEffect(1);
+                _soundHasPlayed = true;
+            }
+            
             _rigidBody.isKinematic = false;
             _rigidBody.useGravity = true;
         }

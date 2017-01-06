@@ -9,11 +9,16 @@ public class AudioManager : MonoBehaviour {
     public AudioMixerSnapshot prep;
 	public AudioMixerSnapshot menu;
 
+    public AudioMixer audioMixer;
+    public AudioMixerGroup audmix;
+
     public List<AudioSource> listOfSoundEffects;
 
     private float m_TransitionAction = 1;
     private float m_TransitionPrep = 2;
 	private float m_TransitionMenu = 2;
+    private float _volumeBeforeMute;
+    private bool _isMuted;
 
 	// Use this for initialization
 	void Start () {
@@ -49,12 +54,25 @@ public class AudioManager : MonoBehaviour {
 
     public void toggleMusicMute()
     {
+        if (!_isMuted)
+        {
+            audioMixer.GetFloat("MasterVolume", out _volumeBeforeMute);
+            audioMixer.SetFloat("MasterVolume", -80f);
+            _isMuted = true;
+        } else if (_isMuted)
+        {
+            audioMixer.SetFloat("MasterVolume", _volumeBeforeMute);
+            _isMuted = false;
+        }
         
     }
 
     public void playSoundEffect(int numberOfSfxToPlay)
     {
-        listOfSoundEffects[numberOfSfxToPlay].Play();
+        if (listOfSoundEffects[numberOfSfxToPlay] != null)
+        {
+            listOfSoundEffects[numberOfSfxToPlay].Play();
+        }
     }
 
     public void playRandomHitSound()

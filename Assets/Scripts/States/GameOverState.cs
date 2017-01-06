@@ -16,6 +16,13 @@ namespace WizardCube
         public override void StateActivated()
         {
             SceneManager.LoadSceneAsync(2, LoadSceneMode.Single);
+            GameManager.Instance.AudioManager.toggleMusicMute();
+            GameManager.Instance.AudioManager.playSoundEffect(11);
+        }
+
+        public override void StateDeactivating()
+        {
+            GameManager.Instance.AudioManager.toggleMusicMute();
         }
     }
 }

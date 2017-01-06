@@ -44,6 +44,9 @@ namespace WizardCube
         public Texture2D raisedTexture;
         public Texture2D loweredTexture;
 
+        private GameObject canvas;
+        private Pause pause;
+
         void Awake()
         {
             _blockLimiter = GameObject.Find("BlockController").GetComponent<BlockLimiter>();
@@ -52,6 +55,9 @@ namespace WizardCube
             _animator = GetComponent<Animator>();
             _turret = GetComponentInChildren<Turret>();
             whereDoesBlockGo = moveDirection.noMovement;
+
+            canvas = GameObject.Find("Canvas");
+            pause = canvas.GetComponent<Pause>();
         }
 
         // Use this for initialization
@@ -111,13 +117,22 @@ namespace WizardCube
             
         }
 			
+        private void OnMouseEnter()
+        {
+            if (pause.paused)
+            {
+                if (GameManager.Instance.StateManager.CurrentStateType == StateType.Preparations)
+                {
+                    GameManager.Instance.AudioManager.playSoundEffect(12);
+                }
+            }
+        }
+
         void OnMouseOver()
         {
-			GameObject Canvas = GameObject.Find ("Canvas");
-			Pause pause = Canvas.GetComponent<Pause> ();
-
 			if (pause.paused) {
-	            if (!blockRaised)
+
+                if (!blockRaised)
 	            {
 	                if (_blockLimiter.canRaise)
 	                {

@@ -43,6 +43,7 @@ namespace WizardCube
 
             GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveOutOfMenu(buildIndexToGoTo);
+            GameManager.Instance.AudioManager.playSoundEffect(13);
 
             //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
         }
@@ -69,6 +70,7 @@ namespace WizardCube
 
             GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveToLevelSelect();
+            GameManager.Instance.AudioManager.playSoundEffect(13);
 
             //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
         }

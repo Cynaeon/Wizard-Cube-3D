@@ -23,6 +23,7 @@ namespace WizardCube
         private Animator _animator;
 
         private bool _prepareToDie;
+        private bool _soundHasPlayed;
 
         private void Awake()
         {
@@ -57,7 +58,12 @@ namespace WizardCube
             {
                 if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !_animator.IsInTransition(0))
                 {
-                    GameManager.Instance.AudioManager.playSoundEffect(5);
+                    if (!_soundHasPlayed)
+                    {
+                        GameManager.Instance.AudioManager.playSoundEffect(5);
+                        _soundHasPlayed = true;
+                    }
+
                     GameManager.Instance.ManageEnemyList(this);
                     Destroy(this.gameObject);
                 }
