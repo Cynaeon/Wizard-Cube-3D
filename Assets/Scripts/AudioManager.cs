@@ -10,7 +10,6 @@ public class AudioManager : MonoBehaviour {
 	public AudioMixerSnapshot menu;
 
     public AudioMixer audioMixer;
-    public AudioMixerGroup audmix;
 
     public List<AudioSource> listOfSoundEffects;
 

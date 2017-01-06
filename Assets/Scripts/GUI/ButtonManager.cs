@@ -70,7 +70,15 @@ namespace WizardCube
 
             GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveToLevelSelect();
-            GameManager.Instance.AudioManager.playSoundEffect(13);
+
+            if (currentForComparison != StateType.GameOver)
+            {
+                GameManager.Instance.AudioManager.playSoundEffect(13);
+            }
+            else if (currentForComparison == StateType.GameOver)
+            {
+                GameManager.Instance.AudioManager.toggleMusicMute();
+            }
 
             //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
         }
@@ -85,6 +93,7 @@ namespace WizardCube
 
             GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.GameOverRetry();
+            GameManager.Instance.AudioManager.toggleMusicMute();
         }
 
         public void ExitGameButton()

@@ -19,10 +19,5 @@ namespace WizardCube
             GameManager.Instance.AudioManager.toggleMusicMute();
             GameManager.Instance.AudioManager.playSoundEffect(11);
         }
-
-        public override void StateDeactivating()
-        {
-            GameManager.Instance.AudioManager.toggleMusicMute();
-        }
     }
 }
