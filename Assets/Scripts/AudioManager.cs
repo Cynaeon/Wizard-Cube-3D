@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour {
     public List<AudioSource> listOfSoundEffects;
 
     private float m_TransitionAction = 1;
-    private float m_TransitionPrep = 2;
+    private float m_TransitionPrep = 1f;
 	private float m_TransitionMenu = 2;
     private float _volumeBeforeMute;
     private bool _isMuted;

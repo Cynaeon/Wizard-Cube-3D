@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UILevelInfo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AudioManager.cs">
     <Files>
       <File FileName="Assets\Scripts\BlockLimiter.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Player.cs" Line="1" Column="1" />
@@ -9,8 +9,9 @@
       <File FileName="Assets\Scripts\BlockBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\EnemyNavigation.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Bullet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UItext.cs" Line="23" Column="2" />
+      <File FileName="Assets\Scripts\UItext.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UILevelInfo.cs" Line="10" Column="5" />
+      <File FileName="Assets\Scripts\AudioManager.cs" Line="16" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
