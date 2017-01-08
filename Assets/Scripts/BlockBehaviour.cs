@@ -116,17 +116,6 @@ namespace WizardCube
             } 
             
         }
-			
-        private void OnMouseEnter()
-        {
-            if (pause.paused)
-            {
-                if (GameManager.Instance.StateManager.CurrentStateType == StateType.Preparations)
-                {
-                    GameManager.Instance.AudioManager.playSoundEffect(12);
-                }
-            }
-        }
 
         void OnMouseOver()
         {

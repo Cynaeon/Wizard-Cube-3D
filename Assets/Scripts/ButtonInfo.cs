@@ -44,5 +44,10 @@ namespace WizardCube
                 _thisButton.interactable = false;
             }
         }
+
+        private void OnMouseEnter()
+        {
+            GameManager.Instance.AudioManager.playSoundEffect(12);       
+        }
     }
 }

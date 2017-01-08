@@ -17,7 +17,6 @@ namespace WizardCube
             GameManager.Instance.LevelEndSettings();
 
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
-            //Debug.LogWarning("Current state before transition: " + currentForComparison);
 
             if (currentForComparison == StateType.Active)
             {
@@ -31,21 +30,17 @@ namespace WizardCube
             {
                 GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToPreparations);
             }
-
-            //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
+            
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         }
 
         public void MoveToLevelFromMenu(int buildIndexToGoTo)
         {
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
-            //Debug.LogWarning("Current state before transition: " + currentForComparison);
 
             GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveOutOfMenu(buildIndexToGoTo);
-            GameManager.Instance.AudioManager.playSoundEffect(13);
-
-            //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
+            
         }
 
         public void ChangeLevel(int buildIndexToGoTo)
@@ -66,21 +61,14 @@ namespace WizardCube
         public void ToMenuButton()
         {
             StateType currentForComparison = GameManager.Instance.StateManager.CurrentStateType;
-            //Debug.LogWarning("Current state before transition: " + currentForComparison);
 
             GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.LevelManager.MoveToLevelSelect();
 
-            if (currentForComparison != StateType.GameOver)
-            {
-                GameManager.Instance.AudioManager.playSoundEffect(13);
-            }
-            else if (currentForComparison == StateType.GameOver)
+            if (currentForComparison == StateType.GameOver)
             {
                 GameManager.Instance.AudioManager.toggleMusicMute();
             }
-
-            //Debug.LogWarning("Current state after transition: " + GameManager.Instance.StateManager.CurrentStateType);
         }
 
         public void RetryGameOverButton()
