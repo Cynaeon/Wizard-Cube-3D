@@ -138,7 +138,7 @@ namespace WizardCube
             {
                 if (hit.collider.gameObject.tag == "Enemy")
                 {
-                    Debug.LogWarning(hit.collider.gameObject.name + " detected right in front!");
+                    //Debug.LogWarning(hit.collider.gameObject.name + " detected right in front!");
                     
                     if (_aiLerp.canMove)
                     {

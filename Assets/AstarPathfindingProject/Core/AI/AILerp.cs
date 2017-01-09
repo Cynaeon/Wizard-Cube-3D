@@ -217,7 +217,7 @@ public class AILerp : MonoBehaviour {
 		// If we are following a path, start searching from the node we will reach next
 		// this can prevent odd turns right at the start of the path
 		if (path != null && path.vectorPath.Count > 1) {
-			currentPosition = path.vectorPath[currentWaypointIndex];
+			//currentPosition = path.vectorPath[currentWaypointIndex];
 		}
 
 		canSearchAgain = false;
