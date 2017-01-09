@@ -81,18 +81,6 @@ namespace WizardCube
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                DebugUnlockAll();
-            }
-            else if (Input.GetKeyDown(KeyCode.Y))
-            {
-                ResetSave();
-            }
-        }
-
         protected void OnLevelWasLoaded(int levelIndex)
         {
             if (SceneLoaded != null)
