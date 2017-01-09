@@ -96,6 +96,11 @@ namespace WizardCube
             GameManager.Instance.LevelManager.MoveToNextStage();
         }
 
+        public void PlayEnterSound()
+        {
+            GameManager.Instance.AudioManager.playSoundEffect(12);
+        }
+
         // Use this for initialization
         void Start()
         {
