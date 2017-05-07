@@ -12,9 +12,9 @@ public class TurretTest : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    if (Input.GetKeyDown(KeyCode.P))
-        {
-            _animator.SetTrigger("TurretOn");
-        }
+	    //if (Input.GetKeyDown(KeyCode.P))
+     //   {
+     //       _animator.SetTrigger("TurretOn");
+     //   }
 	}
 }
