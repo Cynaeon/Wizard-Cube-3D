@@ -5,12 +5,15 @@ namespace WizardCube
 {
     public class HoleBlockBehaviour : MonoBehaviour
     {
+        public Transform parentTransform;
+
         private Rigidbody _rigidBody;
         private float _countdown;
         private bool _timeUntilFall;
         private Vector3 positionAtStart;
         private GameObject enemyInHole;
         private bool _soundHasPlayed;
+        private bool _fallingDown = false;
 
         private void Awake()
         {
@@ -40,7 +43,13 @@ namespace WizardCube
                 }
             }
 
-            if (transform.position.y <= -4)
+            if (_fallingDown)
+            {
+                float newY = parentTransform.position.y - 0.2f;
+                parentTransform.position = new Vector3(parentTransform.position.x, newY, parentTransform.position.z);
+            }
+
+            if (parentTransform.position.y <= -4)
             {
                 GameManager.Instance.AddCube(positionAtStart);
                 GameManager.Instance.ManageEnemyList(enemyInHole.GetComponent<EnemyAI>());
@@ -69,9 +78,8 @@ namespace WizardCube
                 GameManager.Instance.AudioManager.playSoundEffect(1);
                 _soundHasPlayed = true;
             }
-            
-            _rigidBody.isKinematic = false;
-            _rigidBody.useGravity = true;
+
+            _fallingDown = true;
         }
     }
 }
