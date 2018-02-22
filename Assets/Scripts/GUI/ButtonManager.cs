@@ -6,10 +6,9 @@ namespace WizardCube
 {
     public class ButtonManager : MonoBehaviour
     {
-
         public void NewGameButton(string level)
         {
-			if (Time.timeScale != 1) {
+            if (Time.timeScale != 1) {
 				Time.timeScale = 1;
 			}
             GameManager.Instance.AudioManager.playSoundEffect(4);
@@ -30,7 +29,7 @@ namespace WizardCube
             {
                 GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToPreparations);
             }
-            
+
             SceneManager.LoadSceneAsync(level, LoadSceneMode.Single);
         }
 
@@ -106,6 +105,7 @@ namespace WizardCube
 
         public void SaveResetButton()
         {
+            GameManager.Instance.AudioManager.playSoundEffect(4);
             GameManager.Instance.ResetSave();
         }
 

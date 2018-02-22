@@ -70,6 +70,7 @@ public class AudioManager : MonoBehaviour {
     {
         if (listOfSoundEffects[numberOfSfxToPlay] != null)
         {
+
             listOfSoundEffects[numberOfSfxToPlay].Play();
         }
     }
