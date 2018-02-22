@@ -314,9 +314,12 @@ namespace WizardCube
             Scene currentScene = SceneManager.GetActiveScene();
             int buildIndexOfLevelToUnlock = currentScene.buildIndex - 1;
 
-            PlayerPrefs.SetInt("Latest Unlock", buildIndexOfLevelToUnlock);
-            latestUnlockedLevel = buildIndexOfLevelToUnlock;
-            SaveGame();
+            if (buildIndexOfLevelToUnlock > latestUnlockedLevel)
+            {
+                PlayerPrefs.SetInt("Latest Unlock", buildIndexOfLevelToUnlock);
+                latestUnlockedLevel = buildIndexOfLevelToUnlock;
+                SaveGame();
+            }
         }
 
         public void DebugUnlockAll()
@@ -337,8 +340,6 @@ namespace WizardCube
         {
             int lastUnlockedLevel = PlayerPrefs.GetInt("Latest Unlock", 1);
             latestUnlockedLevel = lastUnlockedLevel;
-
-            //Sound stuff can go here as well
         }
     }
 }

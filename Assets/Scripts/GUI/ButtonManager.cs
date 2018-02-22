@@ -104,6 +104,11 @@ namespace WizardCube
             }
         }
 
+        public void SaveResetButton()
+        {
+            GameManager.Instance.ResetSave();
+        }
+
         // Use this for initialization
         void Start()
         {
