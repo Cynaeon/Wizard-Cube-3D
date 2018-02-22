@@ -77,7 +77,6 @@ namespace WizardCube
         public void GameOverRetry()
         {
             int lastSceneBuildIndex = GameManager.Instance.sceneBeforeGameOver;
-            Debug.LogWarning(lastSceneBuildIndex);
 
             GameManager.Instance.StateManager.PerformTransition(TransitionType.GameOverToPreparations);
             SceneManager.LoadSceneAsync(lastSceneBuildIndex, LoadSceneMode.Single);

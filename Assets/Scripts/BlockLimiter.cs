@@ -39,7 +39,6 @@ namespace WizardCube
         public void setRaised(int blockRaised)
         {
             _raised += blockRaised;
-            Debug.Log("Raised amount: " + _raised);
         }
 
 		public void setTurret(int turretPlaced)
