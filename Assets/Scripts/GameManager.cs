@@ -257,7 +257,6 @@ namespace WizardCube
             }
         }
 
-
         public void MoveToGameOver()
         {
             LevelEndSettings();
