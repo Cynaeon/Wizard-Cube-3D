@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace WizardCube
 {
@@ -28,7 +29,8 @@ namespace WizardCube
 
 		public void check()
 		{
-			if(Application.loadedLevelName == "level01"){
+
+			if(SceneManager.GetActiveScene().name == "level01"){
 				if (_limiter._raised == 0) {
 					text.text = "Press ground to raise blocks";
 				}
@@ -39,7 +41,18 @@ namespace WizardCube
 					text.text = "Now press begin!";
 				}
 			}
-			if (Application.loadedLevelName == "level05") {
+            if(SceneManager.GetActiveScene().name == "level04")
+            {
+                if (_limiter._raised < _limiter.maxRaisedAmount)
+                {
+                    text.text = "You can't raise darker blocks";
+                }
+                else
+                {
+                    text.text = "";
+                }
+            }
+			if (SceneManager.GetActiveScene().name == "level05") {
 				if (_limiter._turretsPlaced == 0) {
 					text.text = "You can place turrets by right clicking a raised cube";
 				}
